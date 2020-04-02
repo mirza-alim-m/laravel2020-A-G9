@@ -15,6 +15,9 @@
                 <li class="nav-item">
                     <a href="<?php echo e(route('peminjaman.index')); ?>" class="nav-link">Data Peminjaman</a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?php echo e(route('category.index')); ?>" class="nav-link">Data Category</a>
+                </li>
             </ul>
         </div>
     </nav>

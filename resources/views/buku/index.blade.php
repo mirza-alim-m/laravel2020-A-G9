@@ -21,9 +21,10 @@
     <thead>
         <tr>
             <td width="5%">No</td>
-            <td width="10%">Judul</td>
+            <td width="10%">Category</td>
+            <td width="20%">Judul</td>
             <td width="30%">Penerbit</td>
-            <td width="30%">Penulis</td>
+            <td width="20%">Penulis</td>
             <td width="5%">Jumlah</td>
             <td width="5%" colspan="2">Opsi</td>
         </tr>
@@ -34,6 +35,7 @@
         <?php $no++ ;?>
         <tr>
             <td>{{$no}}</td>
+            <td>{{$bk->category}}</td>
             <td>{{$bk->judul}}</td>
             <td>{{$bk->penerbit}}</td>
             <td>{{$bk->penulis}}</td>

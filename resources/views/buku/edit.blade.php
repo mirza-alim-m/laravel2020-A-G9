@@ -19,7 +19,16 @@
         <form action="{{ route('buku.update',$buku->id) }}" method="POST">
             @csrf
             @method('PUT')
-
+            
+            <div class="form-group">
+            <label for="inputct">Category Buku</label>
+            <select id="inputct" class="form-control" name="category" required>
+                <option value="{{ $buku->category}}"> {{ $buku->category}}</option>
+            @foreach(App\Category::get() as $bk)
+                <option value='{{ $bk->name }}'>{{ $bk->name }}</option>
+            @endforeach
+            </select>
+            </div>
             <div class="form-group">
                 <label>Judul Buku</label>
                 <input type="text" class="form-control" name="judul" value="{{ $buku->judul }}" />
@@ -36,7 +45,7 @@
                 <label>Jumlah</label>
                 <input type="text" class="form-control" name="jumlah" value="{{ $buku->jumlah}}" />
             </div>
-            <button type="submit" class="btn btn-primary">Tambah Data</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
 
     </form>

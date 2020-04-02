@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Buku;
+use App\Category;
 use Illuminate\Http\Request;
 
-class SiswaController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,9 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $buku = Buku::all();
-        return view('buku.index', compact('buku'));
+        $category = Category::all();
+        return view('category.index', compact('category'));
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -27,7 +25,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('buku.create');
+        return view('category.create');
     }
 
     /**
@@ -39,24 +37,20 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $validasi = $request->validate([
-            'category' => 'required',
-            'judul' => 'required',
-            'penerbit' => 'required',
-            'jumlah' => 'required',
-            'penulis' => 'required',
+            'name' => 'required'
         ]);
-        $buku = Buku::create($validasi);
+        $category = Category::create($validasi);
 
-        return redirect('/buku')->with('success', 'Selamat data berhasil ditambah!');
+        return redirect('/category')->with('success', 'Selamat data berhasil ditambah!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Buku  $buku
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Buku $buku)
+    public function show(Category $category)
     {
         //
     }
@@ -64,46 +58,42 @@ class SiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Buku  $buku
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Buku $buku)
+    public function edit(Category $category)
     {
-        return view('buku.edit', compact('buku'));
+        return view('category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Buku  $buku
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $validasi = $request->validate([
-            'category' => 'required',
-            'judul' => 'required',
-            'penerbit' => 'required',
-            'jumlah' => 'required',
-            'penulis' => 'required',
+            'name' => 'required'
         ]);
-        Buku::whereId($id)->update($validasi);
+        Category::whereId($id)->update($validasi);
 
-        return redirect('buku')->with('success', 'Data berhasil di update');
+        return redirect('category')->with('success', 'Data berhasil di update');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Buku  $buku
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $buku = Buku::findOrFail($id);
-        $buku->delete();
+        $category = Category::findOrFail($id);
+        $category->delete();
 
-        return redirect('/buku')->with('success', 'Data berhasil dihapus!');
+        return redirect('/category')->with('success', 'Data berhasil dihapus!');
     }
 }

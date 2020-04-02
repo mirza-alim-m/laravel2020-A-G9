@@ -21,25 +21,27 @@
             @method('PUT')
 
             <div class="form-group">
-                <label>NIM</label>
-                <input type="text" class="form-control" name="nim" value="{{ $member->nim }}" readonly/>
-            </div>
-            <div class="form-group">
-                <label>Nama</label>
-                <input type="text" class="form-control" name="nama" value="{{ $member->nama }}" />
-            </div>
-            <div class="form-group">
-            <label for="inputjk">Jenis Kelamin</label>
-            <select id="inputjk" class="form-control" name="jk" required>
-                <option value="{{ $member->jk}}">{{ $member->jk}}</option>
-                <option value="Laki-Laki">Laki-Laki</option>
-                <option value="Perempuan">Perempuan</option>
+            <label for="inputct">Category Buku</label>
+            <select id="inputct" class="form-control" name="judul" required>
+                <option value="{{ $peminjaman->judul}}"> {{ $peminjaman->judul}}</option>
+            @foreach(App\Peminjaman::get() as $bk)
+                <option value='{{ $bk->judul }}'>{{ $bk->judul }}</option>
+            @endforeach
             </select>
+            </div>
+
+            <div class="form-group">
+                <label>NIM Peminjam</label>
+                <input type="text" class="form-control" name="nim" value="{{ $peminjaman->nim }}" />
+            </div>
+            <div class="form-group">
+                <label>Nama Peminjam</label>
+                <input type="text" class="form-control" name="nama" value="{{ $peminjaman->nama }}" autocomplete="off" required/>
             </div>
             <div class="form-group">
                 <label for="inputprodi">Prodi</label>
                 <select id="inputprodi" class="form-control" name="prodi" required>
-                    <option value="{{ $member->prodi}}">{{ $member->prodi}}</option>
+                    <option value="{{ $peminjaman->prodi}}">{{ $peminjaman->prodi}}</option>
                     <option value="D3 Kebidanan">D3 Kebidanan</option>
                     <option value="D3 Farmasi">D3 Farmasi</option>
                     <option value="D3 Akuntansi">D3 Akuntansi</option>
@@ -51,6 +53,10 @@
                     <option value="D4 Teknik Informatika">D4 Teknik Informatika</option>
                     <option value="D4 Akuntansi Sektor Publik">D4 Akuntansi Sektor Publik</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Tanggal</label>
+                <input type="text" class="form-control" name="tanggal" value="{{$peminjaman->tanggal}}" autocomplete="off" required/>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
     </div>

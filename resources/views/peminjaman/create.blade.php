@@ -17,26 +17,26 @@
         @endif
         <form method="post" action="{{ route('peminjaman.store') }}">
             @csrf
-            @method('PUT')
             <!-- <div class="form-group">
                 <label>Nama Buku</label>
                 <input type="text" class="form-control" name="nama_buku" autocomplete="off" onkeypress="return hanyaAngka(event)" required/>
             </div> -->
             <div class="form-group">
             <label for="inputjk">Nama Buku</label>
-            <select id="inputjk" class="form-control" name="nama_buku" required>
-            @foreach($buku as $bk)
-                <option value="{{ $buku->judul}}">{{ $buku->judul}}</option>
+            <select id="inputjk" class="form-control" name="judul" required>
+                <option value=""> -- Select One --</option>
+            @foreach(App\Buku::get() as $bk)
+                <option value='{{ $bk->judul }}'>{{ $bk->judul }}</option>
             @endforeach
             </select>
             </div>
             <div class="form-group">
                 <label>NIM Peminjam</label>
-                <input type="text" class="form-control" name="nim_peminjam" autocomplete="off" required/>
+                <input type="text" class="form-control" name="nim" autocomplete="off" required/>
             </div>
             <div class="form-group">
                 <label>Nama Peminjam</label>
-                <input type="text" class="form-control" name="nama_peminjam" autocomplete="off" required/>
+                <input type="text" class="form-control" name="nama" autocomplete="off" required/>
             </div>
             <div class="form-group">
                 <label for="inputprodi">Prodi</label>
@@ -71,5 +71,6 @@
  
 		    return false;
 		  return true;
-		}	
+		}
+
 </script>

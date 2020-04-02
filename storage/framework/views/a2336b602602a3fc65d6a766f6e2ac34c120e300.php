@@ -15,26 +15,26 @@
         <?php endif; ?>
         <form method="post" action="<?php echo e(route('peminjaman.store')); ?>">
             <?php echo csrf_field(); ?>
-            <?php echo method_field('PUT'); ?>
             <!-- <div class="form-group">
                 <label>Nama Buku</label>
                 <input type="text" class="form-control" name="nama_buku" autocomplete="off" onkeypress="return hanyaAngka(event)" required/>
             </div> -->
             <div class="form-group">
             <label for="inputjk">Nama Buku</label>
-            <select id="inputjk" class="form-control" name="nama_buku" required>
-            <?php $__currentLoopData = $buku; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bk): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <option value="<?php echo e($buku->judul); ?>"><?php echo e($buku->judul); ?></option>
+            <select id="inputjk" class="form-control" name="judul" required>
+                <option value=""> -- Select One --</option>
+            <?php $__currentLoopData = App\Buku::get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bk): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <option value='<?php echo e($bk->judul); ?>'><?php echo e($bk->judul); ?></option>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </select>
             </div>
             <div class="form-group">
                 <label>NIM Peminjam</label>
-                <input type="text" class="form-control" name="nim_peminjam" autocomplete="off" required/>
+                <input type="text" class="form-control" name="nim" autocomplete="off" required/>
             </div>
             <div class="form-group">
                 <label>Nama Peminjam</label>
-                <input type="text" class="form-control" name="nama_peminjam" autocomplete="off" required/>
+                <input type="text" class="form-control" name="nama" autocomplete="off" required/>
             </div>
             <div class="form-group">
                 <label for="inputprodi">Prodi</label>
@@ -69,6 +69,7 @@
  
 		    return false;
 		  return true;
-		}	
+		}
+
 </script>
 <?php echo $__env->make('peminjaman.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\laravel_pert3\resources\views/peminjaman/create.blade.php ENDPATH**/ ?>

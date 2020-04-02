@@ -35,9 +35,9 @@
         <?php $no++ ;?>
         <tr>
             <td>{{$no}}</td>
-            <td>{{$bk->nama_buku}}</td>
-            <td>{{$bk->nim_peminjam}}</td>
-            <td>{{$bk->nama_peminjam}}</td>
+            <td>{{$bk->judul}}</td>
+            <td>{{$bk->nim}}</td>
+            <td>{{$bk->nama}}</td>
             <td>{{$bk->prodi}}</td>
             <td>{{$bk->tanggal}}</td>
             <td><a href="{{ route('peminjaman.edit', $bk->id)}}" class="btn btn-warning fa fa-edit"> Edit</a></td>

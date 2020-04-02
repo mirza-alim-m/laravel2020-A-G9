@@ -10,13 +10,18 @@ class peminjaman extends Model
 {
     use Notifiable;
 
+    public function buku()
+    {
+        return $this->belongsTo('App\Buku');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nama_buku', 'nim_peminjam', 'nama_peminjam', 'prodi', 'tanggal',
+        'judul', 'nim', 'nama', 'prodi', 'tanggal',
     ];
 
     /**

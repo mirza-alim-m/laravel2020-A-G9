@@ -21,6 +21,13 @@ class PeminjamanController extends Controller
 
         $buku = Buku::all();
         return view('peminjaman.index', compact('peminjaman'));
+
+        $peminjaman = Buku::find($id)->peminjaman;
+        echo $peminjaman->judul;
+        echo $peminjaman->nim;
+        echo $peminjaman->nama;
+        echo $peminjaman->prodi;
+        echo $peminjaman->tanggal;
     }
 
 
@@ -44,9 +51,9 @@ class PeminjamanController extends Controller
     public function store(Request $request)
     {
         $validasi = $request->validate([
-            'nama_buku' => 'required',
-            'nim_peminjam' => 'required',
-            'nama_peminjam' => 'required',
+            'judul' => 'required',
+            'nim' => 'required',
+            'nama' => 'required',
             'prodi' => 'required',
             'tanggal' => 'required',
         ]);
@@ -87,9 +94,9 @@ class PeminjamanController extends Controller
     public function update(Request $request, $id)
     {
         $validasi = $request->validate([
-            'nama_buku' => 'required',
-            'nim_peminjam' => 'required',
-            'nama_peminjam' => 'required',
+            'judul' => 'required',
+            'nim' => 'required',
+            'nama' => 'required',
             'prodi' => 'required',
             'tanggal' => 'required',
         ]);

@@ -12,6 +12,12 @@
                 <li class="nav-item">
                     <a href="{{ route('member.index')}}" class="nav-link">Data Keanggotaan</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('peminjaman.index')}}" class="nav-link">Data Peminjaman</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('category.index')}}" class="nav-link">Data Category</a>
+                </li>
             </ul>
         </div>
     </nav>

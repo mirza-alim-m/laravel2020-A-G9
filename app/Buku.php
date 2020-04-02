@@ -8,6 +8,10 @@ use Illuminate\Notifications\Notifiable;
 
 class buku extends Model
 {
+    public function peminjam()
+    {
+        return $this->hasOne('App\Peminjam');
+    }
     use Notifiable;
 
     /**
@@ -16,7 +20,7 @@ class buku extends Model
      * @var array
      */
     protected $fillable = [
-        'judul', 'penerbit', 'penulis', 'jumlah',
+        'category','judul', 'penerbit', 'penulis', 'jumlah',
     ];
 
     /**
