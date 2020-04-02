@@ -18,8 +18,8 @@
         <form method="post" action="{{ route('category.store') }}">
             @csrf
             <div class="form-group">
-                <label>Nama Kategori</label>
-                <input type="text" class="form-control" name="name" autocomplete="off" required />
+                <label>Kategory</label>
+                <input type="text" class="form-control" name="name" />
             </div>
             <button type="submit" class="btn btn-primary">Tambah Data</button>
         </form>

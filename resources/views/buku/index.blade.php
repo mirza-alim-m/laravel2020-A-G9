@@ -7,7 +7,7 @@
 </div><br />
 @endif
 <p>Cari Data Buku :</p>
-<form action="/buku/cari" method="GET" class="row mb-4">
+<form action="{{ route('buku.index') }}" method="GET" class="row mb-4">
 <div class="col-md-2">
         <input type="text" name="cari" class="form-control" placeholder="Cari nama .." value="{{ old('cari') }}">
     </div>
