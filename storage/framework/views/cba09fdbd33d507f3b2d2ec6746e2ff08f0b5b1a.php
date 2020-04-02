@@ -20,10 +20,9 @@
     <thead>
         <tr>
             <td width="5%">No</td>
-            <td width="10%">Category</td>
-            <td width="20%">Judul</td>
+            <td width="10%">Judul</td>
             <td width="30%">Penerbit</td>
-            <td width="20%">Penulis</td>
+            <td width="30%">Penulis</td>
             <td width="5%">Jumlah</td>
             <td width="5%" colspan="2">Opsi</td>
         </tr>
@@ -34,7 +33,6 @@
         <?php $no++ ;?>
         <tr>
             <td><?php echo e($no); ?></td>
-            <td><?php echo e($bk->category); ?></td>
             <td><?php echo e($bk->judul); ?></td>
             <td><?php echo e($bk->penerbit); ?></td>
             <td><?php echo e($bk->penulis); ?></td>

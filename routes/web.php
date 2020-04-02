@@ -19,7 +19,6 @@ Route::get('/', function () {
 });
 Route::resource('buku', 'SiswaController');
 
-
 //Member
 Route::get('/', function () {
     return view('member.layout');

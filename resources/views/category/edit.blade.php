@@ -23,7 +23,7 @@
 
             <div class="form-group">
                 <label>Nama</label>
-                <input type="text" class="form-control" name="name" value="{{ $category->name }}" />
+                <input type="text" class="form-control" name="nama" value="{{ $category->nama }}" />
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
     </div>

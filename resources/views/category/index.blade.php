@@ -7,7 +7,7 @@
 </div><br />
 @endif
 
-<p>Cari Data Category :</p>
+<p>Cari Data Anggota :</p>
 
 <form action="{{ route('category.index') }}" method="GET" class="row mb-4">
     <div class="col-md-2">

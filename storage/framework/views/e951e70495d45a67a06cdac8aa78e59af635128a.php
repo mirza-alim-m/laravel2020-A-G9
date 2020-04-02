@@ -34,9 +34,9 @@
         <?php $no++ ;?>
         <tr>
             <td><?php echo e($no); ?></td>
-            <td><?php echo e($bk->judul); ?></td>
-            <td><?php echo e($bk->nim); ?></td>
-            <td><?php echo e($bk->nama); ?></td>
+            <td><?php echo e($bk->nama_buku); ?></td>
+            <td><?php echo e($bk->nim_peminjam); ?></td>
+            <td><?php echo e($bk->nama_peminjam); ?></td>
             <td><?php echo e($bk->prodi); ?></td>
             <td><?php echo e($bk->tanggal); ?></td>
             <td><a href="<?php echo e(route('peminjaman.edit', $bk->id)); ?>" class="btn btn-warning fa fa-edit"> Edit</a></td>
