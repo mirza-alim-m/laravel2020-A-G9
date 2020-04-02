@@ -30,3 +30,9 @@ Route::get('/', function () {
     return view('peminjaman.layout');
 });
 Route::resource('peminjaman', 'PeminjamanController');
+
+//Category
+Route::get('/', function () {
+    return view('category.layout');
+});
+Route::resource('category', 'CategoryController');
