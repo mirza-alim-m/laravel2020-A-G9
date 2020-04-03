@@ -10606,6 +10606,7 @@ Did you mean one of these?
 #41 D:\\xamp\\htdocs\\laravel2020-A-G9\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #42 {main}
 >>>>>>> 12491eccbfbc24c6a1652936ca903222846d29fa
+<<<<<<< HEAD
 "} 
 [2020-04-03 09:16:45] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at D:\\laravel2020-A-G9\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:192)
 [stacktrace]
@@ -11010,4 +11011,6 @@ Did you mean this?
 #43 D:\\laravel2020-A-G9\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #44 D:\\laravel2020-A-G9\\server.php(21): require_once('D:\\\\laravel2020-...')
 #45 {main}
+=======
+>>>>>>> af78a5c6907573ca70774858b09b62e0df2ddbfb
 "} 
