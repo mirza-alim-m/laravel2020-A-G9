@@ -6,7 +6,13 @@
     {{ session()->get('success') }}
 </div><br />
 @endif
+<<<<<<< HEAD
 <p>Cari Data Category :</p>
+=======
+
+<p>Cari Data Anggota :</p>
+
+>>>>>>> 12491eccbfbc24c6a1652936ca903222846d29fa
 <form action="{{ route('category.index') }}" method="GET" class="row mb-4">
 <div class="col-md-2">
         <input type="text" name="cari" class="form-control" placeholder="Cari nama .." value="{{ old('cari') }}">
@@ -26,9 +32,15 @@
         </tr>
     </thead>
     <tbody>
+<<<<<<< HEAD
         <?php $no = 0;?>
         @foreach($category as $bk)
         <?php $no++ ;?>
+=======
+        <?php $no = 0; ?>
+        @foreach($category as $bk)
+        <?php $no++; ?>
+>>>>>>> 12491eccbfbc24c6a1652936ca903222846d29fa
         <tr>
             <td>{{$no}}</td>
             <td>{{$bk->name}}</td>
