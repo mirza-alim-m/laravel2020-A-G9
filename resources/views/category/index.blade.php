@@ -6,7 +6,9 @@
     {{ session()->get('success') }}
 </div><br />
 @endif
-<p>Cari Data Category :</p>
+
+<p>Cari Data Anggota :</p>
+
 <form action="{{ route('category.index') }}" method="GET" class="row mb-4">
 <div class="col-md-2">
         <input type="text" name="cari" class="form-control" placeholder="Cari nama .." value="{{ old('cari') }}">
@@ -14,7 +16,7 @@
     <button type="submit" class="btn2 mr-sm-2"><i class="fas fa-search"></i>Cari</button>
 </form>
 <div class="float-right">
-<a href="{{ route('buku.create')}}" class="btn3 mr-sm-4 fa fa-plus-circle">Tambah Data</a></td><br><br>
+<a href="{{ route('category.create')}}" class="btn3 mr-sm-4 fa fa-plus-circle">Tambah Data</a></td><br><br>
 </div>
 
 <table class="table table-striped border">
@@ -26,9 +28,9 @@
         </tr>
     </thead>
     <tbody>
-        <?php $no = 0;?>
+        <?php $no = 0; ?>
         @foreach($category as $bk)
-        <?php $no++ ;?>
+        <?php $no++; ?>
         <tr>
             <td>{{$no}}</td>
             <td>{{$bk->name}}</td>
