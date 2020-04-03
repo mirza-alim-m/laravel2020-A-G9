@@ -21,8 +21,18 @@
             @method('PUT')
             
             <div class="form-group">
+<<<<<<< HEAD
                 <label>Nama</label>
                 <input type="text" class="form-control" name="nama" value="{{ $category->nama }}" />
+=======
+<<<<<<< HEAD
+                <label>Category</label>
+                <input type="text" class="form-control" name="name" value="{{ $category->name }}" />
+=======
+                <label>Nama</label>
+                <input type="text" class="form-control" name="nama" value="{{ $category->nama }}" />
+>>>>>>> 12491eccbfbc24c6a1652936ca903222846d29fa
+>>>>>>> af78a5c6907573ca70774858b09b62e0df2ddbfb
             </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
