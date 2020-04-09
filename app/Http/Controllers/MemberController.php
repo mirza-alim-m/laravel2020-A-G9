@@ -14,7 +14,7 @@ class MemberController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $cari = $request->nim or $request->cari;
         $filter = $request->name or $request->filter;
 
@@ -22,19 +22,18 @@ class MemberController extends Controller
 
         $member = Member::paginate(10);
 
-        if($cari = $request->get('cari')){
-            $member = Member::where('nim','like',"%".$cari."%")
-            ->orWhere('nama','like',"%".$cari."%")
-            ->orWhere('prodi','like',"%".$cari."%")
-            ->paginate(10);
-            return view('member.index',['member' => $member]);
-            
-        }elseif($filter = $request->get('filter')){
-            $member = Member::where('prodi','like',"%".$filter."%")->paginate(10);
-            return view('member.index',['member' => $member]);
+        if ($cari = $request->get('cari')) {
+            $member = Member::where('nim', 'like', "%" . $cari . "%")
+                ->orWhere('nama', 'like', "%" . $cari . "%")
+                ->orWhere('prodi', 'like', "%" . $cari . "%")
+                ->paginate(10);
+            return view('member.index', ['member' => $member]);
+        } elseif ($filter = $request->get('filter')) {
+            $member = Member::where('prodi', 'like', "%" . $filter . "%")->paginate(10);
+            return view('member.index', ['member' => $member]);
             // return view('member.index', compact('member'));
         }
-        return view('member.index',['member' => $member]);
+        return view('member.index', ['member' => $member]);
     }
 
 
@@ -65,7 +64,7 @@ class MemberController extends Controller
         ]);
         $member = Member::create($validasi);
 
-        return redirect('/member')->with('success', 'Selamat data berhasil ditambah!');
+        return redirect('member')->with('success', 'Selamat data berhasil ditambah!');
     }
 
     /**
@@ -76,7 +75,6 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        
     }
 
     /**

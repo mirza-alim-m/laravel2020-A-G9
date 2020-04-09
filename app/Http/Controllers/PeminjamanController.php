@@ -17,23 +17,22 @@ class PeminjamanController extends Controller
     {
         $cari = $request->nim or $request->cari;
         $filter = $request->name or $request->filter;
-        
+
         $peminjaman = Peminjaman::paginate(10);
 
-        if($cari = $request->get('cari')){
-            $peminjaman = Peminjaman::where('nim','like',"%".$cari."%")
-            ->orWhere('nama','like',"%".$cari."%")
-            ->orWhere('prodi','like',"%".$cari."%")
-            ->orWhere('judul','like',"%".$cari."%")
-            ->paginate(10);
-            return view('peminjaman.index',['peminjaman' => $peminjaman]);
-            
-        }elseif($filter = $request->get('filter')){
-            $peminjaman = Peminjaman::where('prodi','like',"%".$filter."%")->paginate(10);
-            return view('peminjaman.index',['peminjaman' => $peminjaman]);
+        if ($cari = $request->get('cari')) {
+            $peminjaman = Peminjaman::where('nim', 'like', "%" . $cari . "%")
+                ->orWhere('nama', 'like', "%" . $cari . "%")
+                ->orWhere('prodi', 'like', "%" . $cari . "%")
+                ->orWhere('judul', 'like', "%" . $cari . "%")
+                ->paginate(10);
+            return view('peminjaman.index', ['peminjaman' => $peminjaman]);
+        } elseif ($filter = $request->get('filter')) {
+            $peminjaman = Peminjaman::where('prodi', 'like', "%" . $filter . "%")->paginate(10);
+            return view('peminjaman.index', ['peminjaman' => $peminjaman]);
             // return view('peminjaman.index', compact('peminjaman'));
         }
-        return view('peminjaman.index',['peminjaman' => $peminjaman]);
+        return view('peminjaman.index', ['peminjaman' => $peminjaman]);
         //return view('peminjaman.index', compact('peminjaman'));
 
         // $buku = Buku::all();
@@ -76,7 +75,7 @@ class PeminjamanController extends Controller
         ]);
         $peminjaman = Peminjaman::create($validasi);
 
-        return redirect('/peminjaman')->with('success', 'Selamat data berhasil ditambah!');
+        return redirect('peminjaman')->with('success', 'Selamat data berhasil ditambah!');
     }
 
     /**
@@ -87,7 +86,6 @@ class PeminjamanController extends Controller
      */
     public function show(Peminjaman $peminjaman)
     {
-        
     }
 
     /**

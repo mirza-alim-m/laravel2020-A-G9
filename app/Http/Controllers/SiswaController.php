@@ -14,26 +14,25 @@ class SiswaController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $cari = $request->nim or $request->cari;
         $filter = $request->name or $request->filter;
-        
+
         $buku = Buku::paginate(10);
 
-        if($cari = $request->get('cari')){
-            $buku = Buku::where('category','like',"%".$cari."%")
-            ->orWhere('judul','like',"%".$cari."%")
-            ->orWhere('penerbit','like',"%".$cari."%")
-            ->orWhere('penulis','like',"%".$cari."%")
-            ->paginate(10);
-            return view('buku.index',['buku' => $buku]);
-            
-        }elseif($filter = $request->get('filter')){
-            $buku = Buku::where('category','like',"%".$filter."%")->paginate(10);
-            return view('buku.index',['buku' => $buku]);
+        if ($cari = $request->get('cari')) {
+            $buku = Buku::where('category', 'like', "%" . $cari . "%")
+                ->orWhere('judul', 'like', "%" . $cari . "%")
+                ->orWhere('penerbit', 'like', "%" . $cari . "%")
+                ->orWhere('penulis', 'like', "%" . $cari . "%")
+                ->paginate(10);
+            return view('buku.index', ['buku' => $buku]);
+        } elseif ($filter = $request->get('filter')) {
+            $buku = Buku::where('category', 'like', "%" . $filter . "%")->paginate(10);
+            return view('buku.index', ['buku' => $buku]);
             // return view('buku.index', compact('buku'));
         }
-        return view('buku.index',['buku' => $buku]);
+        return view('buku.index', ['buku' => $buku]);
     }
 
 
@@ -65,7 +64,7 @@ class SiswaController extends Controller
         ]);
         $buku = Buku::create($validasi);
 
-        return redirect('/buku')->with('success', 'Selamat data berhasil ditambah!');
+        return redirect('buku')->with('success', 'Selamat data berhasil ditambah!');
     }
 
     /**
