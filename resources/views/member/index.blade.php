@@ -36,10 +36,10 @@
     <thead>
         <tr>
             <td width="10%">NIM</td>
-            <td width="35%">Nama</td>
-            <td width="10%">Jenis Kelamin</td>
-            <td width="15%">Prodi</td>
-            <td width="5%" colspan="2">Opsi</td>
+            <td width="50%">Nama</td>
+            <td width="15%">Jenis Kelamin</td>
+            <td width="20%">Prodi</td>
+            <td width="5%">Opsi</td>
         </tr>
     </thead>
     <tbody>
@@ -50,6 +50,7 @@
             <td>{{$bk->nama}}</td>
             <td>{{$bk->jk}}</td>
             <td>{{$bk->prodi}}</td>
+            <td><a href="" class="btn btn-info" data-toggle="modal" data-target="#myModal-{{ $bk->id }}">View</a></td>
             <td><a href="{{ route('member.edit', $bk->id)}}" class="btn btn-warning fa fa-edit"> Edit</a></td>
             <td>
                 <form action="{{ route('member.destroy', $bk->id)}}" method="post">
@@ -62,9 +63,56 @@
         @endforeach
     </tbody>
 </table>
-    <!-- Halaman : {{ $member->currentPage() }} <br/>
-	Jumlah Data : {{ $member->total() }} <br/>
-	Data Per Halaman : {{ $member->perPage() }} <br/> -->
-
+    
 {{ $member->links() }}
+
+@foreach($member as $data)
+<div id="myModal-{{ $data->id }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	    <!-- konten modal-->
+	    <div class="modal-content">
+			<!-- heading modal -->
+            <div class="modal-header">
+				<h4 class="modal-title">Data Anggota</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<!-- body modal -->
+                
+			<div class="modal-body">
+                <form action="" method="POST">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>NIM</th>
+                                        <td>{{ $data->nim }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <td>{{ $data->nama }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jenis Kelamin</th>
+                                        <td>{{ $data->jk }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Prodi</th>
+                                        <td>{{ $data->prodi }}</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+				<!-- footer modal -->
+				<!-- <div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button>
+				</div> -->
+            </div>
+		</div>
+    </div>
+</div>
+@endforeach
+
 @endsection

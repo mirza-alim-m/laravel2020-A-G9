@@ -41,6 +41,7 @@
         <tr>
             <td>{{$no}}</td>
             <td>{{$bk->name}}</td>
+            <td><a href="" class="btn btn-info" data-toggle="modal" data-target="#myModal-{{ $bk->id }}">View</a></td>
             <td><a href="{{ route('category.edit', $bk->id)}}" class="btn btn-warning fa fa-edit"> Edit</a></td>
             <td>
                 <form action="{{ route('category.destroy', $bk->id)}}" method="post">
@@ -54,4 +55,42 @@
     </tbody>
 </table>
 {{ $category->links() }}
+
+@foreach($category as $data)
+<div id="myModal-{{ $data->id }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	    <!-- konten modal-->
+	    <div class="modal-content">
+			<!-- heading modal -->
+            <div class="modal-header">
+				<h4 class="modal-title">Data Anggota</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<!-- body modal -->
+                
+			<div class="modal-body">
+                <form action="" method="POST">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <td>{{ $data->name }}</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+				<!-- footer modal -->
+				<!-- <div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button>
+				</div> -->
+            </div>
+		</div>
+    </div>
+</div>
+@endforeach
+
 @endsection

@@ -14,26 +14,35 @@ class SiswaController extends Controller
      */
     public function index(Request $request)
     {
-        
-        $cari = $request->nim or $request->cari;
-        $filter = $request->name or $request->filter;
-        
+
+        $cari = $request->cari or $request->cari;
+        $filter = $request->filter or $request->filter;
+
         $buku = Buku::paginate(10);
 
-        if($cari = $request->get('cari')){
-            $buku = Buku::where('category','like',"%".$cari."%")
-            ->orWhere('judul','like',"%".$cari."%")
-            ->orWhere('penerbit','like',"%".$cari."%")
-            ->orWhere('penulis','like',"%".$cari."%")
-            ->paginate(10);
+        if ($cari = $request->get('cari')) {
+            $buku = Buku::when($request->cari,function($query) use($request){
+                $query->where('category','like',"%{$request->cari}%")
+                ->orWhere('judul','like',"%{$request->cari}%")
+                ->orWhere('penerbit','like',"%{$request->cari}%")
+                ->orWhere('penulis','like',"%{$request->cari}%")->orderBy('judul');
+                })->paginate(10);
+            
+            $buku->appends($request->only('cari'));
+                
+            return view('buku.index',['buku' => $buku]);
+
+        } elseif ($filter = $request->get('filter')) {
+            $buku = Buku::when($request->cari,function($query) use($request){
+                $query -> where('category','like',"%".$filter."%")->orderBy('judul');
+                })->paginate(10);
+
+            $buku->appends($request->only('filter'));
+            
             return view('buku.index',['buku' => $buku]);
             
-        }elseif($filter = $request->get('filter')){
-            $buku = Buku::where('category','like',"%".$filter."%")->paginate(10);
-            return view('buku.index',['buku' => $buku]);
-            // return view('buku.index', compact('buku'));
         }
-        return view('buku.index',['buku' => $buku]);
+        return view('buku.index', ['buku' => $buku]);
     }
 
 
@@ -65,7 +74,7 @@ class SiswaController extends Controller
         ]);
         $buku = Buku::create($validasi);
 
-        return redirect('/buku')->with('success', 'Selamat data berhasil ditambah!');
+        return redirect('buku')->with('success', 'Selamat data berhasil ditambah!');
     }
 
     /**
