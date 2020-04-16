@@ -14,20 +14,28 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $cari = $request->name or $request->cari;
-        $filter = $request->name or $request->filter;
+        $cari = $request->cari or $request->cari;
+        $filter = $request->filter or $request->filter;
 
-        $category = Category::paginate(10);
+        $category = Category::orderBy('name')->paginate(10);
 
         if($cari = $request->get('cari')){
-            $category = Category::where('name','like',"%".$cari."%")->paginate(10);
+            $category = Category::when($request->cari,function($query) use($request){
+                $query -> where('name','like',"%{$request->cari}%")->orderBy('name');
+            })->paginate(10);
+            
+            $category->appends($request->only('cari'));
             return view('category.index',['category' => $category]);
+
         }elseif($filter = $request->get('filter')){
-            $category = Category::where('name','like',"%".$filter."%")->paginate(10);
+            $category = Category::when($request->filter,function($query) use($request){
+                $query -> where('name','like',"%{$request->filter}%")->orderBy('name');
+            })->paginate(10);
+
+            $category->appends($request->only('filter'));
             return view('category.index',['category' => $category]);
         }
         return view('category.index',['category' => $category]);
-        // return view('category.index', compact('category'));
         
     }
 

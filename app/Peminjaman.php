@@ -2,14 +2,20 @@
 
 namespace App;
 
+use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Peminjaman as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class peminjaman extends Model
 {
-    use Notifiable;
+    use Sortable;
+    public $sortable = [
+        'judul', 'nim', 'nama', 'prodi', 'tanggal',
+    ];
 
+    use Notifiable;
+    
     public function buku()
     {
         return $this->belongsTo('App\Buku');

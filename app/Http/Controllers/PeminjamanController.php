@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Kyslik\ColumnSortable\Sortable;
 use App\Peminjaman;
 use App\Buku;
 use Illuminate\Http\Request;
@@ -15,36 +16,34 @@ class PeminjamanController extends Controller
      */
     public function index(Request $request)
     {
-        $cari = $request->nim or $request->cari;
-        $filter = $request->name or $request->filter;
-        
-        $peminjaman = Peminjaman::paginate(10);
+        $cari = $request->cari or $request->cari;
+        $filter = $request->filter or $request->filter;
 
-        if($cari = $request->get('cari')){
-            $peminjaman = Peminjaman::where('nim','like',"%".$cari."%")
-            ->orWhere('nama','like',"%".$cari."%")
-            ->orWhere('prodi','like',"%".$cari."%")
-            ->orWhere('judul','like',"%".$cari."%")
-            ->paginate(10);
+        $peminjaman = Peminjaman::sortable()->orderBy('judul')->paginate(10);
+
+        if ($cari = $request->get('cari')) {
+            $peminjaman = Peminjaman::when($request->cari,function($query) use($request){
+                $query -> where('judul','like',"%{$request->cari}%")
+                ->orWhere('nim','like',"%{$request->cari}%")
+                ->orWhere('nama','like',"%{$request->cari}%")
+                ->orWhere('prodi','like',"%{$request->cari}%")
+                ->orWhere('judul','like',"%{$request->cari}%")->sortable()->orderBy('judul');
+            })->paginate(10);
+
+            $peminjaman->appends($request->only('cari'));
+
             return view('peminjaman.index',['peminjaman' => $peminjaman]);
-            
-        }elseif($filter = $request->get('filter')){
-            $peminjaman = Peminjaman::where('prodi','like',"%".$filter."%")->paginate(10);
+
+        } elseif ($filter = $request->get('filter')) {
+            $peminjaman = Peminjaman::when($request->filter,function($query) use($request){
+                $query -> where('prodi','like',"%{$request->filter}%")->sortable()->orderBy('judul');
+            })->paginate(10);
+    
+            $peminjaman->appends($request->only('filter'));
             return view('peminjaman.index',['peminjaman' => $peminjaman]);
-            // return view('peminjaman.index', compact('peminjaman'));
         }
-        return view('peminjaman.index',['peminjaman' => $peminjaman]);
-        //return view('peminjaman.index', compact('peminjaman'));
-
-        // $buku = Buku::all();
-        // return view('peminjaman.index', compact('peminjaman'));
-
-        // $peminjaman = Buku::find($id)->peminjaman;
-        // echo $peminjaman->judul;
-        // echo $peminjaman->nim;
-        // echo $peminjaman->nama;
-        // echo $peminjaman->prodi;
-        // echo $peminjaman->tanggal;
+        return view('peminjaman.index', ['peminjaman' => $peminjaman]);
+        
     }
 
 
@@ -76,7 +75,7 @@ class PeminjamanController extends Controller
         ]);
         $peminjaman = Peminjaman::create($validasi);
 
-        return redirect('/peminjaman')->with('success', 'Selamat data berhasil ditambah!');
+        return redirect('peminjaman')->with('success', 'Selamat data berhasil ditambah!');
     }
 
     /**
@@ -87,7 +86,6 @@ class PeminjamanController extends Controller
      */
     public function show(Peminjaman $peminjaman)
     {
-        
     }
 
     /**

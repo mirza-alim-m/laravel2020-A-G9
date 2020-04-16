@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Member as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,6 +11,10 @@ class member extends Model
 {
     use Notifiable;
 
+    use Sortable;
+    public $sortable = [
+        'nim', 'nama', 'jk', 'prodi',
+    ];
     /**
      * The attributes that are mass assignable.
      *
