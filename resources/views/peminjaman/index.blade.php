@@ -33,11 +33,11 @@
 <table class="table table-striped border">
     <thead>
         <tr>
-            <td width="20%">@sortablelink('judul')</td>
-            <td width="10%">@sortablelink('nim')</td>
-            <td width="25%">@sortablelink('nama')</td>
-            <td width="15%">@sortablelink('prodi')</td>
-            <td width="15%">@sortablelink('tanggal')</td>
+            <td width="20%">Nama Buku</td>
+            <td width="10%">NIM</td>
+            <td width="25%">Nama Peminjam</td>
+            <td width="15%">Prodi</td>
+            <td width="15%">Tanggal</td>
             <td width="5%" colspan="2">Opsi</td>
         </tr>
     </thead>

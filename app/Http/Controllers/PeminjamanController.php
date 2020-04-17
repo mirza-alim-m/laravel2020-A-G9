@@ -27,7 +27,7 @@ class PeminjamanController extends Controller
                 ->orWhere('nim','like',"%{$request->cari}%")
                 ->orWhere('nama','like',"%{$request->cari}%")
                 ->orWhere('prodi','like',"%{$request->cari}%")
-                ->orWhere('judul','like',"%{$request->cari}%")->sortable()->orderBy('judul');
+                ->orWhere('judul','like',"%{$request->cari}%")->orderBy('judul');
             })->paginate(10);
 
             $peminjaman->appends($request->only('cari'));
@@ -36,7 +36,7 @@ class PeminjamanController extends Controller
 
         } elseif ($filter = $request->get('filter')) {
             $peminjaman = Peminjaman::when($request->filter,function($query) use($request){
-                $query -> where('prodi','like',"%{$request->filter}%")->sortable()->orderBy('judul');
+                $query -> where('prodi','like',"%{$request->filter}%")->orderBy('judul');
             })->paginate(10);
     
             $peminjaman->appends($request->only('filter'));

@@ -28,7 +28,7 @@ class MemberController extends Controller
                 $query -> where('nim','like',"%{$request->cari}%")
                 ->orWhere('nama','like',"%{$request->cari}%")
                 ->orWhere('jk','like',"%{$request->cari}%")
-                ->orWhere('prodi','like',"%{$request->cari}%")->sortable()->orderBy('nim');
+                ->orWhere('prodi','like',"%{$request->cari}%")->orderBy('nim');
             })->paginate(10);
             
             $member->appends($request->only('cari'));
@@ -37,7 +37,7 @@ class MemberController extends Controller
 
         } elseif ($filter = $request->get('filter')) {
             $member = Member::when($request->filter,function($query) use($request){
-                $query -> where('prodi','like',"%{$request->filter}%")->sortable()->orderBy('nim');
+                $query -> where('prodi','like',"%{$request->filter}%")->orderBy('nim');
             })->paginate(10);
     
             $member->appends($request->only('filter'));
