@@ -18,13 +18,13 @@
         <form method="post" action="{{ route('buku.store') }}">
             @csrf
             <div class="form-group">
-            <label for="inputct">Category Buku</label>
-            <select id="inputct" class="form-control" name="category" required>
-                <option value=""> -- Select One --</option>
-            @foreach(App\Category::get() as $bk)
-                <option value='{{ $bk->name }}'>{{ $bk->name }}</option>
-            @endforeach
-            </select>
+                <label for="inputct">Category Buku</label>
+                <select id="inputct" class="form-control" name="category_id" required>
+                    <option value=""> -- Select One --</option>
+                    @foreach(App\Category::get() as $bk)
+                    <option value='{{ $bk->id }}'>{{ $bk->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label>Judul Buku</label>

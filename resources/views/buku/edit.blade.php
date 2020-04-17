@@ -19,15 +19,15 @@
         <form action="{{ route('buku.update',$buku->id) }}" method="POST">
             @csrf
             @method('PUT')
-            
+
             <div class="form-group">
-            <label for="inputct">Category Buku</label>
-            <select id="inputct" class="form-control" name="category" required>
-                <option value="{{ $buku->category}}"> {{ $buku->category}}</option>
-            @foreach(App\Category::get() as $bk)
-                <option value='{{ $bk->name }}'>{{ $bk->name }}</option>
-            @endforeach
-            </select>
+                <label for="inputct">Category Buku</label>
+                <select id="inputct" class="form-control" name="category_id" required=>
+                    <option value="{{ $buku->category_id}}"> {{ $buku->category->name}}</option>
+                    @foreach(App\Category::get() as $bk)
+                    <option value='{{ $bk->id }}'>{{ $bk->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label>Judul Buku</label>

@@ -11,6 +11,7 @@ class member extends Model
 {
     use Notifiable;
 
+    protected $table = 'member';
     use Sortable;
     public $sortable = [
         'nim', 'nama', 'jk', 'prodi',

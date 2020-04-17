@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Kyslik\ColumnSortable\Sortable;
+
 use App\Buku;
+use App\Category;
 use Illuminate\Http\Request;
+
 
 class SiswaController extends Controller
 {
@@ -19,29 +21,28 @@ class SiswaController extends Controller
         $cari = $request->cari or $request->cari;
         $filter = $request->filter or $request->filter;
 
-        $buku = Buku::sortable()->orderBy('category')->paginate(10);
+        $buku = Buku::paginate(10);
+
 
         if ($cari = $request->get('cari')) {
-            $buku = Buku::when($request->cari,function($query) use($request){
-                $query->where('category','like',"%{$request->cari}%")
-                ->orWhere('judul','like',"%{$request->cari}%")
-                ->orWhere('penerbit','like',"%{$request->cari}%")
-                ->orWhere('penulis','like',"%{$request->cari}%")->sortable()->orderBy('judul');
-                })->paginate(10);
-            
-            $buku->appends($request->only('cari'));
-                
-            return view('buku.index',['buku' => $buku]);
+            $buku = Buku::when($request->cari, function ($query) use ($request) {
+                $query->where('category_id', 'like', "%{$request->cari}%")
+                    ->orWhere('judul', 'like', "%{$request->cari}%")
+                    ->orWhere('penerbit', 'like', "%{$request->cari}%")
+                    ->orWhere('penulis', 'like', "%{$request->cari}%")->orderBy('judul');
+            })->paginate(10);
 
+            $buku->appends($request->only('cari'));
+
+            return view('buku.index', ['buku' => $buku]);
         } elseif ($filter = $request->get('filter')) {
-            $buku = Buku::when($request->cari,function($query) use($request){
-                $query -> where('category','like',"%".$filter."%")->sortable()->orderBy('judul');
-                })->paginate(10);
+            $buku = Buku::when($request->cari, function ($query) use ($request) {
+                $query->where('category_id', 'like', "%" . $filter . "%")->orderBy('judul');
+            })->paginate(10);
 
             $buku->appends($request->only('filter'));
-            
-            return view('buku.index',['buku' => $buku]);
-            
+
+            return view('buku.index', ['buku' => $buku]);
         }
         return view('buku.index', ['buku' => $buku]);
     }
@@ -67,7 +68,7 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $validasi = $request->validate([
-            'category' => 'required',
+            'category_id' => 'required',
             'judul' => 'required',
             'penerbit' => 'required',
             'jumlah' => 'required',
@@ -110,7 +111,7 @@ class SiswaController extends Controller
     public function update(Request $request, $id)
     {
         $validasi = $request->validate([
-            'category' => 'required',
+            'category_id' => 'required',
             'judul' => 'required',
             'penerbit' => 'required',
             'jumlah' => 'required',

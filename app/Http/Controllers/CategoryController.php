@@ -17,26 +17,24 @@ class CategoryController extends Controller
         $cari = $request->cari or $request->cari;
         $filter = $request->filter or $request->filter;
 
-        $category = Category::orderBy('name')->paginate(10);
+        $category = Category::paginate(10);
 
-        if($cari = $request->get('cari')){
-            $category = Category::when($request->cari,function($query) use($request){
-                $query -> where('name','like',"%{$request->cari}%")->orderBy('name');
+        if ($cari = $request->get('cari')) {
+            $category = Category::when($request->cari, function ($query) use ($request) {
+                $query->where('name', 'like', "%{$request->cari}%")->orderBy('name');
             })->paginate(10);
-            
-            $category->appends($request->only('cari'));
-            return view('category.index',['category' => $category]);
 
-        }elseif($filter = $request->get('filter')){
-            $category = Category::when($request->filter,function($query) use($request){
-                $query -> where('name','like',"%{$request->filter}%")->orderBy('name');
+            $category->appends($request->only('cari'));
+            return view('category.index', ['category' => $category]);
+        } elseif ($filter = $request->get('filter')) {
+            $category = Category::when($request->filter, function ($query) use ($request) {
+                $query->where('name', 'like', "%{$request->filter}%")->orderBy('name');
             })->paginate(10);
 
             $category->appends($request->only('filter'));
-            return view('category.index',['category' => $category]);
+            return view('category.index', ['category' => $category]);
         }
-        return view('category.index',['category' => $category]);
-        
+        return view('category.index', ['category' => $category]);
     }
 
     /**

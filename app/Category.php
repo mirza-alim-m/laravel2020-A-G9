@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Buku as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use PhpParser\Node\Expr\FuncCall;
 
 class category extends Model
 {
@@ -15,7 +16,13 @@ class category extends Model
      *
      * @var array
      */
+    protected $table = 'category';
     protected $fillable = [
         'name'
     ];
+
+    public function buku()
+    {
+        return $this->hasOne('App\Buku');
+    }
 }

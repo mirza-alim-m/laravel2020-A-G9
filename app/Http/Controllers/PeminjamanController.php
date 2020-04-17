@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Kyslik\ColumnSortable\Sortable;
 use App\Peminjaman;
 use App\Buku;
 use Illuminate\Http\Request;
@@ -19,31 +18,29 @@ class PeminjamanController extends Controller
         $cari = $request->cari or $request->cari;
         $filter = $request->filter or $request->filter;
 
-        $peminjaman = Peminjaman::sortable()->orderBy('judul')->paginate(10);
+        $peminjaman = Peminjaman::paginate(10);
 
         if ($cari = $request->get('cari')) {
-            $peminjaman = Peminjaman::when($request->cari,function($query) use($request){
-                $query -> where('judul','like',"%{$request->cari}%")
-                ->orWhere('nim','like',"%{$request->cari}%")
-                ->orWhere('nama','like',"%{$request->cari}%")
-                ->orWhere('prodi','like',"%{$request->cari}%")
-                ->orWhere('judul','like',"%{$request->cari}%")->sortable()->orderBy('judul');
+            $peminjaman = Peminjaman::when($request->cari, function ($query) use ($request) {
+                $query->where('judul', 'like', "%{$request->cari}%")
+                    ->orWhere('nim', 'like', "%{$request->cari}%")
+                    ->orWhere('nama', 'like', "%{$request->cari}%")
+                    ->orWhere('prodi', 'like', "%{$request->cari}%")
+                    ->orWhere('judul', 'like', "%{$request->cari}%")->orderBy('judul');
             })->paginate(10);
 
             $peminjaman->appends($request->only('cari'));
 
-            return view('peminjaman.index',['peminjaman' => $peminjaman]);
-
+            return view('peminjaman.index', ['peminjaman' => $peminjaman]);
         } elseif ($filter = $request->get('filter')) {
-            $peminjaman = Peminjaman::when($request->filter,function($query) use($request){
-                $query -> where('prodi','like',"%{$request->filter}%")->sortable()->orderBy('judul');
+            $peminjaman = Peminjaman::when($request->filter, function ($query) use ($request) {
+                $query->where('prodi', 'like', "%{$request->filter}%")->orderBy('judul');
             })->paginate(10);
-    
+
             $peminjaman->appends($request->only('filter'));
-            return view('peminjaman.index',['peminjaman' => $peminjaman]);
+            return view('peminjaman.index', ['peminjaman' => $peminjaman]);
         }
         return view('peminjaman.index', ['peminjaman' => $peminjaman]);
-        
     }
 
 
@@ -67,7 +64,7 @@ class PeminjamanController extends Controller
     public function store(Request $request)
     {
         $validasi = $request->validate([
-            'judul' => 'required',
+            'buku_id' => 'required',
             'nim' => 'required',
             'nama' => 'required',
             'prodi' => 'required',
@@ -109,7 +106,7 @@ class PeminjamanController extends Controller
     public function update(Request $request, $id)
     {
         $validasi = $request->validate([
-            'judul' => 'required',
+            'buku_id' => 'required',
             'nim' => 'required',
             'nama' => 'required',
             'prodi' => 'required',

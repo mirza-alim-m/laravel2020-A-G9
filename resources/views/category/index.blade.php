@@ -14,16 +14,16 @@
     <input type="text" name="cari" class="form-control mr-sm-12 mt-2 mr-2" autocomplete="off" placeholder="Search" aria-label="Search" value="{{ old('cari') }}">
     <select id="inputct" class="form-control mr-sm-12 mt-2 mr-2" name="filter">
         <option value="" selected="{{ old('filter') }}"> -- Semua --</option>
-            @foreach(App\Category::get() as $bk)
+        @foreach(App\Category::get() as $bk)
         <option value='{{ $bk->name }}'>{{ $bk->name }}</option>
-            @endforeach
+        @endforeach
     </select>
     <button type="submit" class="btn2 mr-sm-2 mt-2"><i class="fas fa-search"></i>Cari</button>
 
 </form>
 
 <div class="float-right">
-<a href="{{ route('category.create')}}" class="btn3 mr-sm-4 fa fa-plus-circle">Tambah Data</a></td><br><br>
+    <a href="{{ route('category.create')}}" class="btn3 mr-sm-4 fa fa-plus-circle">Tambah Data</a></td><br><br>
 </div>
 
 <table class="table table-striped border">
@@ -58,17 +58,17 @@
 
 @foreach($category as $data)
 <div id="myModal-{{ $data->id }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-	    <!-- konten modal-->
-	    <div class="modal-content">
-			<!-- heading modal -->
+    <div class="modal-dialog" role="document">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
             <div class="modal-header">
-				<h4 class="modal-title">Data Anggota</h4>
+                <h4 class="modal-title">Data Anggota</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<!-- body modal -->
-                
-			<div class="modal-body">
+            </div>
+            <!-- body modal -->
+
+            <div class="modal-body">
                 <form action="" method="POST">
                     <div class="row">
                         <div class="col-lg-12">
@@ -83,12 +83,12 @@
                         </div>
                     </div>
                 </form>
-				<!-- footer modal -->
-				<!-- <div class="modal-footer">
+                <!-- footer modal -->
+                <!-- <div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Tutup Modal</button>
 				</div> -->
             </div>
-		</div>
+        </div>
     </div>
 </div>
 @endforeach

@@ -15,7 +15,7 @@ class CreatePeminjamanTable extends Migration
     {
         Schema::create('peminjamen', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('judul');
+            $table->string('buku_id');
             $table->string('nim');
             $table->string('nama');
             $table->string('prodi');

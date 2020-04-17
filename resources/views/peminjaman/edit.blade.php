@@ -21,13 +21,13 @@
             @method('PUT')
 
             <div class="form-group">
-            <label for="inputct">Category Buku</label>
-            <select id="inputct" class="form-control" name="judul" required>
-                <option value="{{ $peminjaman->judul}}"> {{ $peminjaman->judul}}</option>
-            @foreach(App\Peminjaman::get() as $bk)
-                <option value='{{ $bk->judul }}'>{{ $bk->judul }}</option>
-            @endforeach
-            </select>
+                <label for="inputct">Judul Buku</label>
+                <select id="inputct" class="form-control" name="buku_id" required>
+                    <option value="{{ $peminjaman->buku_id}}"> {{ $peminjaman->buku->judul}}</option>
+                    @foreach(App\Buku::get() as $bk)
+                    <option value='{{ $bk->id }}'>{{ $bk->judul }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group">
@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label>Nama Peminjam</label>
-                <input type="text" class="form-control" name="nama" value="{{ $peminjaman->nama }}" autocomplete="off" required/>
+                <input type="text" class="form-control" name="nama" value="{{ $peminjaman->nama }}" autocomplete="off" required />
             </div>
             <div class="form-group">
                 <label for="inputprodi">Prodi</label>
@@ -56,7 +56,7 @@
             </div>
             <div class="form-group">
                 <label>Tanggal</label>
-                <input type="text" class="form-control" name="tanggal" value="{{$peminjaman->tanggal}}" autocomplete="off" required/>
+                <input type="text" class="form-control" name="tanggal" value="{{$peminjaman->tanggal}}" autocomplete="off" required />
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
     </div>

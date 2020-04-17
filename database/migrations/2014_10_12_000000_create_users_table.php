@@ -13,9 +13,9 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('bukus', function (Blueprint $table) {
+        Schema::create('buku', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('category');
+            $table->string('category_id');
             $table->string('judul');
             $table->string('penerbit');
             $table->integer('jumlah');
