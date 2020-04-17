@@ -37,7 +37,7 @@
         <tr>
             <td width="10%">@sortablelink('nim')</td>
             <td width="30%">@sortablelink('nama')</td>
-            <td width="20%">@sortablelink('jk','jenis kelamin')</td>
+            <td width="20%">@sortablelink('jk','jenis kelamin'</td>
             <td width="25%">@sortablelink('prodi')</td>
             <td width="5%">Opsi</td>
         </tr>
