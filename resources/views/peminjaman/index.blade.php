@@ -33,9 +33,9 @@
 <table class="table table-striped border">
     <thead>
         <tr>
-            <td width="20%">@sortablelink('judul')</td>
+            <td width="20%">@sortablelink('judul','nama buku')</td>
             <td width="10%">@sortablelink('nim')</td>
-            <td width="25%">@sortablelink('nama')</td>
+            <td width="25%">@sortablelink('nama','nama peminjam')</td>
             <td width="15%">@sortablelink('prodi')</td>
             <td width="15%">@sortablelink('tanggal')</td>
             <td width="5%" colspan="2">Opsi</td>
