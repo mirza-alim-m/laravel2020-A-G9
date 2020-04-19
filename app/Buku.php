@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Buku as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +18,11 @@ class buku extends Model
     {
         return $this->hasOne('App\Peminjaman');
     }
+    use Sortable;
     use Notifiable;
+    public $sortable = [
+        'id','category_id','judul', 'penerbit', 'penulis', 'jumlah','created_at','updated_at'
+    ];
     protected $table = 'buku';
     /**
      * The attributes that are mass assignable.

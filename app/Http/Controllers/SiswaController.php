@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Buku;
 use App\Category;
+use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Http\Request;
 
 
@@ -21,7 +22,7 @@ class SiswaController extends Controller
         $cari = $request->cari or $request->cari;
         $filter = $request->filter or $request->filter;
 
-        $buku = Buku::paginate(10);
+        $buku = Buku::sortable()->orderBy('judul')->paginate(10);
 
 
         if ($cari = $request->get('cari')) {
@@ -29,15 +30,16 @@ class SiswaController extends Controller
                 $query->where('category_id', 'like', "%{$request->cari}%")
                     ->orWhere('judul', 'like', "%{$request->cari}%")
                     ->orWhere('penerbit', 'like', "%{$request->cari}%")
-                    ->orWhere('penulis', 'like', "%{$request->cari}%")->orderBy('judul');
+                    ->orWhere('penulis', 'like', "%{$request->cari}%")->sortable()->orderBy('judul');
             })->paginate(10);
 
             $buku->appends($request->only('cari'));
 
             return view('buku.index', ['buku' => $buku]);
+
         } elseif ($filter = $request->get('filter')) {
-            $buku = Buku::when($request->cari, function ($query) use ($request) {
-                $query->where('category_id', 'like', "%" . $filter . "%")->orderBy('judul');
+            $buku = Buku::when($request->filter, function ($query) use ($request) {
+                $query->where('category_id', 'like', "%%{$request->filter}")->sortable()->orderBy('judul');
             })->paginate(10);
 
             $buku->appends($request->only('filter'));

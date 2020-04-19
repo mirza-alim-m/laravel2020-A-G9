@@ -19,14 +19,15 @@ class PeminjamanController extends Controller
         $filter = $request->filter or $request->filter;
 
         $peminjaman = Peminjaman::paginate(10);
+        
 
         if ($cari = $request->get('cari')) {
             $peminjaman = Peminjaman::when($request->cari, function ($query) use ($request) {
-                $query->where('judul', 'like', "%{$request->cari}%")
+                $query -> where('buku_id', 'like', "%{$request->cari}%")
                     ->orWhere('nim', 'like', "%{$request->cari}%")
                     ->orWhere('nama', 'like', "%{$request->cari}%")
                     ->orWhere('prodi', 'like', "%{$request->cari}%")
-                    ->orWhere('judul', 'like', "%{$request->cari}%")->orderBy('judul');
+                    ->orWhere('tanggal', 'like', "%{$request->cari}%")->orderBy('tanggal');
             })->paginate(10);
 
             $peminjaman->appends($request->only('cari'));
@@ -34,7 +35,7 @@ class PeminjamanController extends Controller
             return view('peminjaman.index', ['peminjaman' => $peminjaman]);
         } elseif ($filter = $request->get('filter')) {
             $peminjaman = Peminjaman::when($request->filter, function ($query) use ($request) {
-                $query->where('prodi', 'like', "%{$request->filter}%")->orderBy('judul');
+                $query->where('prodi', 'like', "%{$request->filter}%")->orderBy('tanggal');
             })->paginate(10);
 
             $peminjaman->appends($request->only('filter'));

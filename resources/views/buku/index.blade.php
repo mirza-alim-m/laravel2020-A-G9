@@ -13,7 +13,7 @@
     <select id="inputct" class="form-control mr-sm-12 mt-2 mr-2" name="filter">
         <option value="" selected="{{ old('filter') }}"> -- Semua --</option>
         @foreach(App\Category::get() as $bk)
-        <option value='{{ $bk->name }}'>{{ $bk->name }}</option>
+        <option value='{{ $bk->id }}'>{{ $bk->name }}</option>
         @endforeach
     </select>
     <button type="submit" class="btn2 mr-sm-2 mt-2"><i class="fas fa-search"></i>Cari</button>
@@ -25,10 +25,10 @@
 <table class="table table-striped border">
     <thead>
         <tr>
-            <td width="10%">Category</td>
-            <td width="40%">Judul</td>
-            <td width="20%">Penerbit</td>
-            <td width="20%">Penulis</td>
+            <td width="10%">@sortablelink('category_id')</td>
+            <td width="40%">@sortablelink('judul')</td>
+            <td width="20%">@sortablelink('penerbit')</td>
+            <td width="20%">@sortablelink('penulis')</td>
             <td width="5%">Jumlah</td>
             <td width="5%">Opsi</td>
         </tr>
@@ -55,6 +55,7 @@
         @endforeach
     </tbody>
 </table>
+<!-- {!! $buku->appends(\Request::except('page'))->render() !!} -->
 {{ $buku->links() }}
 
 @foreach($buku as $data)
