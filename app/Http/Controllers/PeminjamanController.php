@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Kyslik\ColumnSortable\Sortable;
 use App\Peminjaman;
 use App\Buku;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class PeminjamanController extends Controller
         $cari = $request->cari or $request->cari;
         $filter = $request->filter or $request->filter;
 
-        $peminjaman = Peminjaman::paginate(10);
+        $peminjaman = Peminjaman::sortable()->paginate(10);
         
 
         if ($cari = $request->get('cari')) {
@@ -27,7 +28,7 @@ class PeminjamanController extends Controller
                     ->orWhere('nim', 'like', "%{$request->cari}%")
                     ->orWhere('nama', 'like', "%{$request->cari}%")
                     ->orWhere('prodi', 'like', "%{$request->cari}%")
-                    ->orWhere('tanggal', 'like', "%{$request->cari}%")->orderBy('tanggal');
+                    ->orWhere('tanggal', 'like', "%{$request->cari}%")->sortable()->orderBy('tanggal');
             })->paginate(10);
 
             $peminjaman->appends($request->only('cari'));
@@ -35,7 +36,7 @@ class PeminjamanController extends Controller
             return view('peminjaman.index', ['peminjaman' => $peminjaman]);
         } elseif ($filter = $request->get('filter')) {
             $peminjaman = Peminjaman::when($request->filter, function ($query) use ($request) {
-                $query->where('prodi', 'like', "%{$request->filter}%")->orderBy('tanggal');
+                $query->where('prodi', 'like', "%{$request->filter}%")->sortable()->orderBy('tanggal');
             })->paginate(10);
 
             $peminjaman->appends($request->only('filter'));

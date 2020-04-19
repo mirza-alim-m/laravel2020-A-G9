@@ -2,18 +2,25 @@
 
 namespace App;
 
+use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Peminjaman as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class peminjaman extends Model
 {
+    use Sortable;
     use Notifiable;
 
     public function buku()
     {
         return $this->belongsTo('App\Buku');
     }
+
+    public $sortable = [
+        'buku_id', 'nim', 'nama', 'prodi', 'tanggal',
+    ];
+
     protected $table = 'peminjamen';
     /**
      * The attributes that are mass assignable.

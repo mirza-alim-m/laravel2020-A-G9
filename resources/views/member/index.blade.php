@@ -35,10 +35,10 @@
 <table class="table table-striped border">
     <thead>
         <tr>
-            <td width="10%">NIM</td>
-            <td width="50%">Nama</td>
-            <td width="15%">Jenis Kelamin</td>
-            <td width="20%">Prodi</td>
+            <td width="10%">@sortablelink('nim')</td>
+            <td width="50%">@sortablelink('nama')</td>
+            <td width="15%">@sortablelink('jk','Jenis Kelamin')</td>
+            <td width="20%">@sortablelink('prodi')</td>
             <td width="5%">Opsi</td>
         </tr>
     </thead>
@@ -63,7 +63,7 @@
         @endforeach
     </tbody>
 </table>
-
+<!-- {!! $member->appends(\Request::except('page'))->render() !!} -->
 {{ $member->links() }}
 
 @foreach($member as $data)
