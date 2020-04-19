@@ -20,8 +20,10 @@
 <br>
 7. Buka Git Bash atau terminal didalam Visual Studio Code
 <br>
-8. php artisan key:generate
+8.install package = composer require kyslik/column-sortable
 <br>
-9. php artisan migrate --seed
+9. php artisan key:generate
 <br>
-10. php artisan serve
+10. php artisan migrate --seed
+<br>
+11. php artisan serve
