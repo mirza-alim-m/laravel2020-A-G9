@@ -78,7 +78,7 @@
                                 <thead>
                                     <tr>
                                         <th>Category</th>
-                                        <td>{{ $data->category}}</td>
+                                        <td>{{ $data->category->name}}</td>
                                     </tr>
                                     <tr>
                                         <th>Nama Buku</th>
