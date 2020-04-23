@@ -105,19 +105,7 @@ class PeminjamanController extends Controller
      * @param  \App\Peminjaman  $peminjaman
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $validasi = $request->validate([
-            'buku_id' => 'required',
-            'nim' => 'required',
-            'nama' => 'required',
-            'prodi' => 'required',
-            'tanggal' => 'required',
-        ]);
-        Peminjaman::whereId($id)->update($validasi);
-
-        return redirect('peminjaman')->with('success', 'Data berhasil di update');
-    }
+    // 
 
     /**
      * Remove the specified resource from storage.
