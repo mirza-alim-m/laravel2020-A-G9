@@ -17,7 +17,7 @@ class memberTablesSeeder extends Seeder
 
         for ($i = 0; $i < 100; $i++) {
 
-            // insert data ke table pegawai menggunakan Faker
+            // insert data ke table member menggunakan Faker
             Member::create([
                 'nim' => $faker->nim,
                 'nama' => $faker->nama,

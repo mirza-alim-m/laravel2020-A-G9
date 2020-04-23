@@ -17,7 +17,7 @@ class PeminjamanTablesSeeder extends Seeder
 
         for ($i = 0; $i < 100; $i++) {
 
-            // insert data ke table pegawai menggunakan Faker
+            // insert data ke table peminjaman menggunakan Faker
             Peminjaman::create([
                 'buku_id' => $faker->buku_id,
                 'nim' => $faker->nim,

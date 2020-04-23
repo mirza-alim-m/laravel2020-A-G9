@@ -17,7 +17,7 @@ class CategoryTablesSeeder extends Seeder
 
         for ($i = 0; $i < 100; $i++) {
 
-            // insert data ke table pegawai menggunakan Faker
+            // insert data ke table category menggunakan Faker
             Category::create([
                 'name' => $faker->name,
 

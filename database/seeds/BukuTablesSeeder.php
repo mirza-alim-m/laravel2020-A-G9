@@ -17,7 +17,7 @@ class BukuTablesSeeder extends Seeder
 
         for ($i = 0; $i < 100; $i++) {
 
-            // insert data ke table pegawai menggunakan Faker
+            // insert data ke table Buku menggunakan Faker
             Buku::create([
                 'judul' => $faker->judul,
                 'category_id' => $faker->category_id,
