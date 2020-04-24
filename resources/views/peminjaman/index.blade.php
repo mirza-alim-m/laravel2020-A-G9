@@ -1,11 +1,23 @@
-@extends('peminjaman.layout')
+@extends('admin.admin')
 
 @section('content')
+<div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Peminjaman</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+              <li class="breadcrumb-item active"><i class="fas fa-book-open"></i> Peminjaman</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
 @if(session()->get('success'))
 <div class="alert alert-success">
     {{ session()->get('success') }}
 </div><br />
 @endif
+
 <p>Cari Data Peminjam :</p>
 <form action="{{ route('peminjaman.index') }}" method="GET" class="form-inline">
 
@@ -24,10 +36,10 @@
         <option value="D4 Akuntansi Sektor Publik">D4 Akuntansi Sektor Publik</option>
 
     </select>
-    <button type="submit" class="btn2 mr-sm-2 mt-2"><i class="fas fa-search"></i>Cari</button>
+    <button type="submit" class="btn2 mr-sm-2 mt-2"><i class="fas fa-search"></i></button>
 </form>
 <div class="float-right">
-    <a href="{{ route('peminjaman.create')}}" class="btn3 mr-sm-4 fa fa-plus-circle">Tambah Data</a></td><br><br>
+    <a href="{{ route('peminjaman.create')}}" class="btn3 mr-sm-4"><i class="fas fa-plus-circle">Tambah Data</i></a></td><br><br>
 </div>
 
 <table class="table table-striped border">
@@ -49,13 +61,13 @@
             <td>{{$bk->nama}}</td>
             <td>{{$bk->prodi}}</td>
             <td>{{$bk->tanggal}}</td>
-            <td><a href="" class="btn btn-info" data-toggle="modal" data-target="#myModal-{{ $bk->id }}">View</a></td>
+            <td><a href="" class="btn btn-info fas fa-eye" data-toggle="modal" data-target="#myModal-{{ $bk->id }}"> View</a></td>
             <td><a href="{{ route('peminjaman.edit', $bk->id)}}" class="btn btn-warning fa fa-edit"> Edit</a></td>
             <td>
                 <form action="{{ route('peminjaman.destroy', $bk->id)}}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger fa fa-trash" type="submit" onclick="return alert('Apakah anda yakin?')"> Delete</button>
+                    <button class="btn btn-danger fa fa-trash-alt" type="submit" onclick="return alert('Apakah anda yakin?')"> Delete</button>
                 </form>
             </td>
         </tr>

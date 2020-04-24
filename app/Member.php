@@ -14,7 +14,7 @@ class member extends Model
     protected $table = 'member';
     use Sortable;
     public $sortable = [
-        'nim', 'nama', 'jk', 'prodi',
+        'nim', 'nama', 'jk', 'prodi','foto','pdf',
     ];
     /**
      * The attributes that are mass assignable.
@@ -22,7 +22,7 @@ class member extends Model
      * @var array
      */
     protected $fillable = [
-        'nim', 'nama', 'jk', 'prodi',
+        'nim', 'nama', 'jk', 'prodi','foto','pdf',
     ];
 
     /**

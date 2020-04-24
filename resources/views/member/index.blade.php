@@ -1,12 +1,24 @@
-@extends('member.layout')
+@extends('admin.admin')
 
 @section('content')
 @if(session()->get('success'))
 <div class="alert alert-success">
     {{ session()->get('success') }}
-</div><br />
+</div>
+<br />
 @endif
-
+<div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Keanggotaan</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+              <li class="breadcrumb-item active"><i class="fas fa-users"></i> Keanggotaan</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      
 <p>Cari Data Anggota :</p>
 
 <form action="{{ route('member.index') }}" method="GET" class="form-inline">
@@ -26,11 +38,11 @@
         <option value="D4 Akuntansi Sektor Publik">D4 Akuntansi Sektor Publik</option>
 
     </select>
-    <button type="submit" class="btn2 mr-sm-2 mt-2"><i class="fas fa-search"></i>Cari</button>
+    <button type="submit" class="btn2 mr-sm-2 mt-2"><i class="fas fa-search"></i></button>
 
 </form>
 <div class="float-right">
-    <a href="{{ route('member.create')}}" class="btn3 mr-sm-4 fa fa-plus-circle">Tambah Data</a></td><br><br>
+    <a href="{{ route('member.create')}}" class="btn3 mr-sm-4"><i class="fas fa-plus-circle"> Tambah Data</i></a></td><br><br>
 </div>
 <table class="table table-striped border">
     <thead>
@@ -50,13 +62,13 @@
             <td>{{$bk->nama}}</td>
             <td>{{$bk->jk}}</td>
             <td>{{$bk->prodi}}</td>
-            <td><a href="" class="btn btn-info" data-toggle="modal" data-target="#myModal-{{ $bk->id }}">View</a></td>
+            <td><a href="" class="btn btn-info fas fa-eye" data-toggle="modal" data-target="#myModal-{{ $bk->id }}"> View</a></td>
             <td><a href="{{ route('member.edit', $bk->id)}}" class="btn btn-warning fa fa-edit"> Edit</a></td>
             <td>
                 <form action="{{ route('member.destroy', $bk->id)}}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger fa fa-trash" type="submit" onclick="return alert('Apakah anda yakin?')"> Delete</button>
+                    <button class="btn btn-danger fa fa-trash-alt" type="submit" onclick="return alert('Apakah anda yakin?')"> Delete</button>
                 </form>
             </td>
         </tr>
@@ -99,6 +111,18 @@
                                     <tr>
                                         <th>Prodi</th>
                                         <td>{{ $data->prodi }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Foto</th>
+                                        <td>
+                                            <img width="25%" src="{{asset('/storage/'.$data->foto)}}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Berkas PDF</th>
+                                        <td>
+                                            <a href="{{asset('/storage/'.$data->pdf)}}" target="new">{{$data->pdf}}</a>
+                                        </td>
                                     </tr>
                                 </thead>
                             </table>

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,27 +15,28 @@
 
 // use Illuminate\Routing\Route;
 
-//Buku
+//admin
 Route::get('/', function () {
-    return view('buku.layout');
+    return view('auth.login');
 });
-Route::resource('buku', 'SiswaController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+
+//Buku
+Route::resource('buku', 'BukuController');
 
 //Member
-Route::get('/', function () {
-    return view('member.layout');
-});
 Route::resource('member', 'MemberController');
 
 //Peminjam
-Route::get('/', function () {
-    return view('peminjaman.layout');
-});
+
 Route::resource('peminjaman', 'PeminjamanController');
 
 //Category
-Route::get('/', function () {
-    return view('category.layout');
-});
+
 Route::resource('category', 'CategoryController');
 
+Route::get('change-password', 'ChangePasswordController@index')->name('change');
+Route::post('change-password', 'ChangePasswordController@store')->name('change.password');

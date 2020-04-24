@@ -1,6 +1,18 @@
-@extends('peminjaman.layout')
+@extends('admin.admin')
 
 @section('content')
+<div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Peminjaman</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('peminjaman.index') }}"><i class="fas fa-book-open"></i> Peminjaman</a></li>
+              <li class="breadcrumb-item active"><i class="fa fa-edit"></i> Edit</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
 <div class="card uper">
     <div class="card-header">
         Form Edit Data

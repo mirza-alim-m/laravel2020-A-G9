@@ -1,11 +1,24 @@
-@extends('buku.layout')
+@extends('admin.admin')
 
 @section('content')
+<div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Buku</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+              <li class="breadcrumb-item active"><i class="fas fa-book"></i> Buku</a></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+
 @if(session()->get('success'))
 <div class="alert alert-success">
     {{ session()->get('success') }}
 </div><br />
 @endif
+
 <p>Cari Data Buku :</p>
 <form action="{{ route('buku.index') }}" method="GET" class="form-inline">
 
@@ -16,10 +29,10 @@
         <option value='{{ $bk->id }}'>{{ $bk->name }}</option>
         @endforeach
     </select>
-    <button type="submit" class="btn2 mr-sm-2 mt-2"><i class="fas fa-search"></i>Cari</button>
+    <button type="submit" class="btn2 mr-sm-2 mt-2"><i class="fas fa-search"></i></button>
 </form>
 <div class="float-right">
-    <a href="{{ route('buku.create')}}" class="btn3 mr-sm-4 fa fa-plus-circle">Tambah Data</a></td><br><br>
+    <a href="{{ route('buku.create')}}" class="btn3 mr-sm-4"><i class="fas fa-plus-circle"> Tambah Data</i></a></td><br><br>
 </div>
 
 <table class="table table-striped border">
@@ -42,13 +55,13 @@
             <td>{{$bk->penerbit}}</td>
             <td>{{$bk->penulis}}</td>
             <td>{{$bk->jumlah}}</td>
-            <td><a href="" class="btn btn-info" data-toggle="modal" data-target="#myModal-{{ $bk->id }}">View</a></td>
+            <td><a href="" class="btn btn-info fas fa-eye" data-toggle="modal" data-target="#myModal-{{ $bk->id }}"> View</a></td>
             <td><a href="{{ route('buku.edit', $bk->id)}}" class="btn btn-warning fa fa-edit"> Edit</a></td>
             <td>
                 <form action="{{ route('buku.destroy', $bk->id)}}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger fa fa-trash" type="submit" onclick="return alert('Apakah anda yakin?')"> Delete</button>
+                    <button class="btn btn-danger fas fa-trash-alt" type="submit" onclick="return alert('Apakah anda yakin?')"> Delete</button>
                 </form>
             </td>
         </tr>
@@ -65,7 +78,7 @@
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
-                <h4 class="modal-title">Data Peminjaman</h4>
+                <h4 class="modal-title">Data Buku</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- body modal -->

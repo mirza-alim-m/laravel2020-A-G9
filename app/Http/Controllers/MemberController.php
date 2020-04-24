@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Kyslik\ColumnSortable\Sortable;
 use App\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Storage;
+
 
 class MemberController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+     }
     /**
      * Display a listing of the resource.
      *
@@ -68,13 +74,31 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        $validasi = $request->validate([
+        $this->validate($request, [
             'nim' => 'required',
             'nama' => 'required',
             'jk' => 'required',
             'prodi' => 'required',
-        ]);
-        $member = Member::create($validasi);
+            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'pdf' => 'mimes:pdf'
+
+            ]);
+        //mengambil request gambar dengan nama asli
+        $image = $request->file('foto')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
+        $foto = $request->file('foto')->storeAs('member',$image);
+
+        $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
+        $doc = $request->file('pdf')->storeAs('document',$pdf);
+
+        //mengambil request gambar dengan nama asli
+        $member = Member::create([
+            'nim' => $request->nim,
+            'nama' => $request->nama,
+            'jk' => $request->jk,
+            'prodi' => $request->prodi,
+            'foto' => $foto,
+            'pdf' => $doc
+            ]);
 
         return redirect('member')->with('success', 'Selamat data berhasil ditambah!');
     }
@@ -109,13 +133,40 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validasi = $request->validate([
+        $this->validate($request, [
             'nim' => 'required',
             'nama' => 'required',
             'jk' => 'required',
             'prodi' => 'required',
+            'foto' => 'image|mimes:jpeg,jpg,png,gif',// baru 'gambar' adalah name dari input foto crud
+            'pdf' => 'mimes:pdf',
         ]);
-        Member::whereId($id)->update($validasi);
+
+        $member = Member::findOrfail($id);
+        $foto = $member->foto;
+        $pdf = $member->pdf;
+        
+         //update dan save gambar ke folder storage creators
+         if ($request->foto) {
+            Storage::delete($member->foto);
+            //mengambil request gambar dengan nama asli
+            $image = $request->file('foto')->getClientOriginalName();
+            $foto = $request->file('foto')->storeAs('member', $image);
+         } //baru
+         if ($request->pdf) {
+            Storage::delete($member->pdf);
+            //mengambil request gambar dengan nama asli
+            $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'pdf' adalah name dari inputan
+            $doc = $request->file('pdf')->storeAs('document',$pdf);
+         } //baru
+         $member->update([
+            'nim' => $request->nim,
+            'nama' => $request->nama,
+            'jk' => $request->jk,
+            'prodi' => $request->prodi,
+            'foto' => $foto,
+            'pdf' => $pdf,
+            ]);
 
         return redirect('member')->with('success', 'Data berhasil di update');
     }
@@ -129,6 +180,12 @@ class MemberController extends Controller
     public function destroy($id)
     {
         $member = Member::findOrFail($id);
+        if ($member->foto) {
+            Storage::delete($member->foto);
+        }
+        if ($member->pdf) {
+            Storage::delete($member->pdf);
+        }
         $member->delete();
 
         return redirect('/member')->with('success', 'Data berhasil dihapus!');

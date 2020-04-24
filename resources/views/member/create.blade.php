@@ -1,6 +1,18 @@
-@extends('member.layout')
+@extends('admin.admin')
 
 @section('content')
+<div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Keanggotaan</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('member.index') }}"><i class="fas fa-users"></i> Keanggotaan</a></li>
+              <li class="breadcrumb-item active"><i class="fa fa-edit"></i> Create</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
 <div class="card uper">
     <div class="card-header">
         Form Tambah Data
@@ -15,7 +27,7 @@
             </ul>
         </div><br />
         @endif
-        <form method="post" action="{{ route('member.store') }}">
+        <form enctype="multipart/form-data" method="post" action="{{ route('member.store') }}">
             @csrf
             <div class="form-group">
                 <label>NIM</label>
@@ -48,6 +60,19 @@
             <option value="D4 Teknik Informatika">D4 Teknik Informatika</option>
             <option value="D4 Akuntansi Sektor Publik">D4 Akuntansi Sektor Publik</option>
 		</select>
+    </div>
+    <div class="form-group">
+        <label>Foto</label>
+        <input type="file" class="form-control-file" name="foto"/>
+    </div>
+    <div class="form-group">
+        <label>Berkas PDF</label>
+        <input type="file" class="form-control-file @error('pdf') is-invalid @enderror" name="pdf"/>
+        @error('pdf')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
     </div>
     <button type="submit" class="btn btn-primary">Tambah Data</button>
     </form>

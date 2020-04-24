@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+     }
     /**
      * Display a listing of the resource.
      *
@@ -105,7 +108,20 @@ class PeminjamanController extends Controller
      * @param  \App\Peminjaman  $peminjaman
      * @return \Illuminate\Http\Response
      */
-    // 
+    //
+    public function update(Request $request, $id)
+    {
+        $validasi = $request->validate([
+            'buku_id' => 'required',
+            'nim' => 'required',
+            'nama' => 'required',
+            'prodi' => 'required',
+            'tanggal' => 'required',
+        ]);
+        Peminjaman::whereId($id)->update($validasi);
+
+        return redirect('peminjaman')->with('success', 'Data berhasil di update');
+    }
 
     /**
      * Remove the specified resource from storage.

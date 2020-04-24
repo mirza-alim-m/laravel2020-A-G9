@@ -30,6 +30,9 @@ class MemberSeeder extends Seeder
                     'D3 Desain Komunikasi Visual',
                     'D4 Teknik Informatika',
                     'D4 Akuntansi Sektor Publik')),
+                
+                'foto'=> 'foto',
+                'pdf'=> 'pdf',
 
                 'created_at' => now(),
                 'updated_at' => now()
