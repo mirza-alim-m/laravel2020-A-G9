@@ -25,7 +25,7 @@
 <table class="table table-striped border">
     <thead>
         <tr>
-            <td width="10%">@sortablelink('category_id')</td>
+            <td width="10%">@sortablelink('category_id','category')</td>
             <td width="40%">@sortablelink('judul')</td>
             <td width="20%">@sortablelink('penerbit')</td>
             <td width="20%">@sortablelink('penulis')</td>
