@@ -7,6 +7,7 @@ use App\Buku;
 use App\Category;
 use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Http\Request;
+use Storage;
 
 
 class BukuController extends Controller
@@ -72,14 +73,35 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        $validasi = $request->validate([
+        $this->validate($request, [
             'category_id' => 'required',
             'judul' => 'required',
             'penerbit' => 'required',
             'jumlah' => 'required',
             'penulis' => 'required',
-        ]);
-        $buku = Buku::create($validasi);
+            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'pdf' => 'mimes:pdf'
+
+            ]);
+        //mengambil request gambar dengan nama asli
+        $image = $request->file('foto')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
+        $foto = $request->file('foto')->storeAs('buku',$image);
+
+        $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
+        $doc = $request->file('pdf')->storeAs('document/buku',$pdf);
+
+        //mengambil request gambar dengan nama asli
+        $buku = Buku::create([
+            'category_id' => $request->category_id,
+            'judul' => $request->judul,
+            'penerbit' => $request->penerbit,
+            'jumlah' => $request->jumlah,
+            'penulis' => $request->penulis,
+            'foto' => $foto,
+            'pdf' => $doc
+            ]);
+            
+
 
         return redirect('buku')->with('success', 'Selamat data berhasil ditambah!');
     }
@@ -115,14 +137,43 @@ class BukuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validasi = $request->validate([
+        $this->validate($request, [
             'category_id' => 'required',
             'judul' => 'required',
             'penerbit' => 'required',
             'jumlah' => 'required',
             'penulis' => 'required',
+            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'pdf' => 'mimes:pdf',
         ]);
-        Buku::whereId($id)->update($validasi);
+
+        $buku = Buku::findOrfail($id);
+        $foto = $buku->foto;
+        $pdf = $buku->pdf;
+        
+         //update dan save gambar ke folder storage creators
+         if ($request->foto) {
+            Storage::delete($buku->foto);
+            //mengambil request gambar dengan nama asli
+            $image = $request->file('foto')->getClientOriginalName();
+            $foto = $request->file('foto')->storeAs('buku', $image);
+         } //baru
+         if ($request->pdf) {
+            Storage::delete($buku->pdf);
+            //mengambil request gambar dengan nama asli
+            $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'pdf' adalah name dari inputan
+            $doc = $request->file('pdf')->storeAs('document/buku',$pdf);
+         } //baru
+         $buku->update([
+            'category_id' => $request->category_id,
+            'judul' => $request->judul,
+            'penerbit' => $request->penerbit,
+            'jumlah' => $request->jumlah,
+            'penulis' => $request->penulis,
+            'foto' => $foto,
+            'pdf' => $doc
+            ]);
+
 
         return redirect('buku')->with('success', 'Data berhasil di update');
     }
@@ -136,6 +187,12 @@ class BukuController extends Controller
     public function destroy($id)
     {
         $buku = Buku::findOrFail($id);
+        if ($buku->foto) {
+            Storage::delete($buku->foto);
+        }
+        if ($buku->pdf) {
+            Storage::delete($buku->pdf);
+        }
         $buku->delete();
 
         return redirect('/buku')->with('success', 'Data berhasil dihapus!');

@@ -20,6 +20,8 @@ class CreateBukuTable extends Migration
             $table->string('penerbit');
             $table->integer('jumlah');
             $table->string('penulis');
+            $table->string('foto');
+            $table->string('pdf');
             $table->timestamps();
         });
     }

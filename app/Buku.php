@@ -21,7 +21,7 @@ class buku extends Model
     use Sortable;
     use Notifiable;
     public $sortable = [
-        'id','category_id','judul', 'penerbit', 'penulis', 'jumlah','created_at','updated_at'
+        'id','category_id','judul', 'penerbit', 'penulis', 'jumlah','foto','pdf','created_at','updated_at'
     ];
     protected $table = 'buku';
     /**
@@ -30,7 +30,7 @@ class buku extends Model
      * @var array
      */
     protected $fillable = [
-        'category_id', 'judul', 'penerbit', 'penulis', 'jumlah',
+        'category_id', 'judul', 'penerbit', 'penulis', 'jumlah','foto','pdf',
     ];
 
     /**

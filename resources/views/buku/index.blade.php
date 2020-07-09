@@ -109,6 +109,18 @@
                                         <th>Jumlah</th>
                                         <td>{{ $data->jumlah }}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Foto</th>
+                                        <td>
+                                            <img width="25%" src="{{asset('/storage/'.$data->foto)}}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Berkas PDF</th>
+                                        <td>
+                                            <a href="{{asset('/storage/'.$data->pdf)}}" target="new">{{$data->pdf}}</a>
+                                        </td>
+                                    </tr>
                                 </thead>
                             </table>
                         </div>

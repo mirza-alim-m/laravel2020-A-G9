@@ -28,7 +28,7 @@
         </div><br />
         @endif
 
-        <form action="{{ route('buku.update',$buku->id) }}" method="POST">
+        <form action="{{ route('buku.update',$buku->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -56,6 +56,14 @@
             <div class="form-group">
                 <label>Jumlah</label>
                 <input type="text" class="form-control" name="jumlah" value="{{ $buku->jumlah}}" />
+            </div>
+            <div class="form-group">
+                <label>Ubah Foto</label>
+                <input type="file" class="form-control-file" name="foto"/>
+            </div>
+            <div class="form-group">
+                <label>Ubah Document</label>
+                <input type="file" class="form-control-file" name="pdf"/>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
