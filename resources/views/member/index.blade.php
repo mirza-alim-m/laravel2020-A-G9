@@ -121,7 +121,7 @@
                                     <tr>
                                         <th>Berkas PDF</th>
                                         <td>
-                                            <a href="{{asset('/storage/'.$data->pdf)}}" target="new">{{$data->pdf}}</a>
+                                            <a href="{{asset('/storage/'.$data->pdf)}}" target="new" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{$data->pdf}}</a>
                                         </td>
                                     </tr>
                                 </thead>
