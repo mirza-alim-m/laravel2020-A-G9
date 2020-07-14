@@ -79,16 +79,14 @@ class BukuController extends Controller
             'penerbit' => 'required',
             'jumlah' => 'required',
             'penulis' => 'required',
-            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'foto' => '|image|mimes:jpeg,jpg,png,gif',
             'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
 
             ]);
         //mengambil request gambar dengan nama asli
-        $image = $request->file('foto')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
-        $foto = $request->file('foto')->storeAs('buku',$image);
+        $foto = $request->file('foto')->store('buku');
 
-        $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
-        $doc = $request->file('pdf')->storeAs('document/buku',$pdf);
+        $pdf = $request->file('pdf')->store('document/buku');
 
         //mengambil request gambar dengan nama asli
         $buku = Buku::create([
@@ -98,7 +96,7 @@ class BukuController extends Controller
             'jumlah' => $request->jumlah,
             'penulis' => $request->penulis,
             'foto' => $foto,
-            'pdf' => $doc
+            'pdf' => $pdf
             ]);
             
 
@@ -143,7 +141,7 @@ class BukuController extends Controller
             'penerbit' => 'required',
             'jumlah' => 'required',
             'penulis' => 'required',
-            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'foto' => 'image|mimes:jpeg,jpg,png,gif',
             'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
         ]);
 
@@ -155,14 +153,12 @@ class BukuController extends Controller
          if ($request->foto) {
             Storage::delete($buku->foto);
             //mengambil request gambar dengan nama asli
-            $image = $request->file('foto')->getClientOriginalName();
-            $foto = $request->file('foto')->storeAs('buku', $image);
+            $foto = $request->file('foto')->store('buku');
          } //baru
          if ($request->pdf) {
             Storage::delete($buku->pdf);
             //mengambil request gambar dengan nama asli
-            $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'pdf' adalah name dari inputan
-            $doc = $request->file('pdf')->storeAs('document/buku',$pdf);
+            $pdf = $request->file('pdf')->store('document/buku');
          } //baru
          $buku->update([
             'category_id' => $request->category_id,
@@ -171,7 +167,7 @@ class BukuController extends Controller
             'jumlah' => $request->jumlah,
             'penulis' => $request->penulis,
             'foto' => $foto,
-            'pdf' => $doc
+            'pdf' => $pdf
             ]);
 
 

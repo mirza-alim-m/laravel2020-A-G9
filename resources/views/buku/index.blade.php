@@ -119,7 +119,7 @@
                                     <tr>
                                         <th>Berkas PDF</th>
                                         <td>
-                                            <a href="{{asset('/storage/'.$data->pdf)}}" target="new">{{$data->pdf}}</a>
+                                            <a href="{{asset('/storage/'.$data->pdf)}}" target="new">Download <i class="fas fa-file-download"></i></a>
                                         </td>
                                     </tr>
                                 </thead>

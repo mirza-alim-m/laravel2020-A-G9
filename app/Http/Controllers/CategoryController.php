@@ -60,19 +60,17 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'foto' => 'image|mimes:jpeg,jpg,png,gif',
             'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
         ]);
-        $image = $request->file('foto')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
-        $foto = $request->file('foto')->storeAs('category',$image);
+        $foto = $request->file('foto')->store('category');
 
-        $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
-        $doc = $request->file('pdf')->storeAs('document/category',$pdf);
+        $pdf = $request->file('pdf')->store('document/category');
 
         $category = Category::create([
             'name' => $request->name,
             'foto' => $foto,
-            'pdf' => $doc
+            'pdf' => $pdf
             ]);
 
         return redirect('/category')->with('success', 'Selamat data berhasil ditambah!');
@@ -111,7 +109,7 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'foto' => 'image|mimes:jpeg,jpg,png,gif',
             'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
         ]);
 
@@ -123,19 +121,17 @@ class CategoryController extends Controller
          if ($request->foto) {
             Storage::delete($category->foto);
             //mengambil request gambar dengan nama asli
-            $image = $request->file('foto')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
-            $foto = $request->file('foto')->storeAs('category',$image);
+            $foto = $request->file('foto')->store('category');
          } //baru
          if ($request->pdf) {
             Storage::delete($category->pdf);
             //mengambil request gambar dengan nama asli
-            $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
-            $doc = $request->file('pdf')->storeAs('document/category',$pdf);
+            $pdf = $request->file('pdf')->store('document/category');
          } //baru
          $category->update([
             'name' => $request->name,
             'foto' => $foto,
-            'pdf' => $doc
+            'pdf' => $pdf
             ]);
 
         return redirect('category')->with('success', 'Data berhasil di update');
