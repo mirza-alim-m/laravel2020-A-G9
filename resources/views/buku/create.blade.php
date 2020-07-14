@@ -1,18 +1,18 @@
 @extends('admin.admin')
-
+<!-- form input data Buku -->
 @section('content')
 <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Buku</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('buku.index') }}"><i class="fas fa-book"></i> Buku</a></li>
-              <li class="breadcrumb-item active"><i class="fa fa-edit"></i> Create</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Buku</h1>
+    </div><!-- /.col -->
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('buku.index') }}"><i class="fas fa-book"></i> Buku</a></li>
+            <li class="breadcrumb-item active"><i class="fa fa-edit"></i> Create</li>
+        </ol>
+    </div><!-- /.col -->
+</div><!-- /.row -->
 <div class="card uper">
     <div class="card-header">
         Form Tambah Data
@@ -56,15 +56,15 @@
             </div>
             <div class="form-group">
                 <label>Foto</label>
-                <input type="file" class="form-control-file" name="foto"/>
+                <input type="file" class="form-control-file" name="foto" />
             </div>
             <div class="form-group">
                 <label>Berkas PDF</label>
-                <input type="file" class="form-control-file @error('pdf') is-invalid @enderror" name="pdf"/>
+                <input type="file" class="form-control-file @error('pdf') is-invalid @enderror" name="pdf" />
                 @error('pdf')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
             <button type="submit" class="btn btn-primary">Tambah Data</button>

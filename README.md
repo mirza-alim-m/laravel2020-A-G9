@@ -26,4 +26,6 @@
 <br>
 10. php artisan migrate --seed
 <br>
-11. php artisan serve
+11. Php artisan storage:link
+<br>
+12. php artisan serve

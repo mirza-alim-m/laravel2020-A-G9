@@ -8,19 +8,19 @@
 <br />
 @endif
 <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Keanggotaan</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-              <li class="breadcrumb-item active"><i class="fas fa-users"></i> Keanggotaan</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      
-<p>Cari Data Anggota :</p>
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Keanggotaan</h1>
+    </div><!-- /.col -->
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li class="breadcrumb-item active"><i class="fas fa-users"></i> Keanggotaan</li>
+        </ol>
+    </div><!-- /.col -->
+</div><!-- /.row -->
 
+<p>Cari Data Anggota :</p>
+<!-- Pencarian Data Anggota -->
 <form action="{{ route('member.index') }}" method="GET" class="form-inline">
 
     <input type="text" name="cari" class="form-control mr-sm-12 mt-2 mr-2" autocomplete="off" placeholder="Search" aria-label="Search" value="{{ old('cari') }}">
