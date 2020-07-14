@@ -88,7 +88,7 @@ class MemberController extends Controller
         $foto = $request->file('foto')->storeAs('member',$image);
 
         $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
-        $doc = $request->file('pdf')->storeAs('document',$pdf);
+        $doc = $request->file('pdf')->storeAs('document/member',$pdf);
 
         //mengambil request gambar dengan nama asli
         $member = Member::create([

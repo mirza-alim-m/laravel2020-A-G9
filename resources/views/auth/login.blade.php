@@ -60,7 +60,9 @@
             </div>
             <div class="form-check mt-3">
               <center><button><a href="{{route('register')}}" >Created an account</a></button>
+              @if (Route::has('password.request'))
               <button><a href="{{route('password.request')}}" >Lupa Password</a></button></center>
+              @endif
             </div>
         </form>
       </div>

@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 // use Illuminate\Routing\Route;
 
 //admin
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', 'HomeController@index');
+
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
 
 Auth::routes();
 

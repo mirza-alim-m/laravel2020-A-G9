@@ -1,3 +1,6 @@
+@guest
+{{route('auth.login')}}
+@else
 @extends('admin.admin')
 
 @section('content')
@@ -20,3 +23,4 @@
         Welcome
         
 @endsection
+@endguest
