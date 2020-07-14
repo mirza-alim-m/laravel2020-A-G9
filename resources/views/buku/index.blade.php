@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Buku</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-              <li class="breadcrumb-item active"><i class="fas fa-book"></i> Buku</a></li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Buku</h1>
+    </div><!-- /.col -->
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li class="breadcrumb-item active"><i class="fas fa-book"></i> Buku</a></li>
+        </ol>
+    </div><!-- /.col -->
+</div><!-- /.row -->
 
 @if(session()->get('success'))
 <div class="alert alert-success">
@@ -20,6 +20,7 @@
 @endif
 
 <p>Cari Data Buku :</p>
+<!-- Pencarian Data Buku -->
 <form action="{{ route('buku.index') }}" method="GET" class="form-inline">
 
     <input type="text" name="cari" class="form-control mr-sm-12 mt-2 mr-2" autocomplete="off" placeholder="Search" aria-label="Search" value="{{ old('cari') }}">

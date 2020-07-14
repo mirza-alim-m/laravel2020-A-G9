@@ -1,18 +1,19 @@
 @extends('admin.admin')
 
 @section('content')
+<!-- form edit data Member -->
 <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Keanggotaan</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('member.index') }}"><i class="fas fa-users"></i> Keanggotaan</a></li>
-              <li class="breadcrumb-item active"><i class="fa fa-edit"></i> Edit</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Keanggotaan</h1>
+    </div><!-- /.col -->
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('member.index') }}"><i class="fas fa-users"></i> Keanggotaan</a></li>
+            <li class="breadcrumb-item active"><i class="fa fa-edit"></i> Edit</li>
+        </ol>
+    </div><!-- /.col -->
+</div><!-- /.row -->
 <div class="card uper">
     <div class="card-header">
         Form Edit Data
@@ -34,19 +35,19 @@
 
             <div class="form-group">
                 <label>NIM</label>
-                <input type="text" class="form-control" name="nim" value="{{ $member->nim }}" readonly/>
+                <input type="text" class="form-control" name="nim" value="{{ $member->nim }}" readonly />
             </div>
             <div class="form-group">
                 <label>Nama</label>
                 <input type="text" class="form-control" name="nama" value="{{ $member->nama }}" />
             </div>
             <div class="form-group">
-            <label for="inputjk">Jenis Kelamin</label>
-            <select id="inputjk" class="form-control" name="jk" required>
-                <option value="{{ $member->jk}}">{{ $member->jk}}</option>
-                <option value="Laki-Laki">Laki-Laki</option>
-                <option value="Perempuan">Perempuan</option>
-            </select>
+                <label for="inputjk">Jenis Kelamin</label>
+                <select id="inputjk" class="form-control" name="jk" required>
+                    <option value="{{ $member->jk}}">{{ $member->jk}}</option>
+                    <option value="Laki-Laki">Laki-Laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="inputprodi">Prodi</label>
@@ -65,12 +66,21 @@
                 </select>
             </div>
             <div class="form-group">
+<<<<<<< HEAD
+                <label>Ubah Foto</label>
+                <input type="file" class="form-control-file" name="foto" />
+            </div>
+            <div class="form-group">
+                <label>Ubah Document</label>
+                <input type="file" class="form-control-file" name="pdf" />
+=======
                 <label>Ubah Foto Profil</label>
                 <input type="file" class="form-control-file" name="foto"/>
             </div>
             <div class="form-group">
                 <label>Ubah Berkas Document</label>
                 <input type="file" class="form-control-file" name="pdf"/>
+>>>>>>> 760cd0469ad5d573aac68dd52b64a3b2bdec7c97
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
