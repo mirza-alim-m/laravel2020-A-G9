@@ -65,11 +65,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Ubah Foto</label>
+                <label>Ubah Foto Profil</label>
                 <input type="file" class="form-control-file" name="foto"/>
             </div>
             <div class="form-group">
-                <label>Ubah Document</label>
+                <label>Ubah Berkas Document</label>
                 <input type="file" class="form-control-file" name="pdf"/>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>

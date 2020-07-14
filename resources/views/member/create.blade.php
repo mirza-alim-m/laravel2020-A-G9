@@ -62,11 +62,11 @@
 		</select>
     </div>
     <div class="form-group">
-        <label>Foto</label>
+        <label>Foto Profil</label>
         <input type="file" class="form-control-file" name="foto"/>
     </div>
     <div class="form-group">
-        <label>Berkas PDF</label>
+        <label>Berkas Document</label>
         <input type="file" class="form-control-file @error('pdf') is-invalid @enderror" name="pdf"/>
         @error('pdf')
             <span class="invalid-feedback" role="alert">
