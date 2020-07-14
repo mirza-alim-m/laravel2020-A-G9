@@ -79,15 +79,13 @@ class MemberController extends Controller
             'nama' => 'required',
             'jk' => 'required',
             'prodi' => 'required',
-            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'foto' => 'image|mimes:jpeg,jpg,png,gif',
             'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
             ]);
         //mengambil request gambar dengan nama asli
-        $image = $request->file('foto')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
-        $foto = $request->file('foto')->storeAs('member',$image);
+        $foto = $request->file('foto')->store('member');
 
-        $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
-        $doc = $request->file('pdf')->storeAs('document/member',$pdf);
+        $pdf = $request->file('pdf')->store('document/member');
 
         //mengambil request gambar dengan nama asli
         $member = Member::create([
@@ -96,7 +94,7 @@ class MemberController extends Controller
             'jk' => $request->jk,
             'prodi' => $request->prodi,
             'foto' => $foto,
-            'pdf' => $doc
+            'pdf' => $pdf
             ]);
 
         return redirect('member')->with('success', 'Selamat data berhasil ditambah!');
@@ -149,14 +147,13 @@ class MemberController extends Controller
          if ($request->foto) {
             Storage::delete($member->foto);
             //mengambil request gambar dengan nama asli
-            $image = $request->file('foto')->getClientOriginalName();
-            $foto = $request->file('foto')->storeAs('member', $image);
+            $foto = $request->file('foto')->store('member');
          } //baru
          if ($request->pdf) {
             Storage::delete($member->pdf);
             //mengambil request gambar dengan nama asli
-            $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'pdf' adalah name dari inputan
-            $doc = $request->file('pdf')->storeAs('document/member',$pdf);
+            // baru, 'pdf' adalah name dari inputan
+            $pdf = $request->file('pdf')->store('document/member');
          } //baru
          $member->update([
             'nim' => $request->nim,
@@ -164,7 +161,7 @@ class MemberController extends Controller
             'jk' => $request->jk,
             'prodi' => $request->prodi,
             'foto' => $foto,
-            'pdf' => $doc
+            'pdf' => $pdf
             ]);
 
         return redirect('member')->with('success', 'Data berhasil di update');

@@ -78,11 +78,9 @@ class PeminjamanController extends Controller
             'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
             'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
         ]);
-        $image = $request->file('foto')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
-        $foto = $request->file('foto')->storeAs('peminjaman',$image);
+        $foto = $request->file('foto')->store('peminjaman');
 
-        $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
-        $doc = $request->file('pdf')->storeAs('document/peminjaman',$pdf);
+        $pdf = $request->file('pdf')->store('document/peminjaman');
 
         $peminjaman = Peminjaman::create([
             'buku_id' => $request->buku_id,
@@ -91,7 +89,7 @@ class PeminjamanController extends Controller
             'prodi' => $request->prodi,
             'tanggal' => $request->tanggal,
             'foto' => $foto,
-            'pdf' => $doc
+            'pdf' => $pdf
             ]);            
             
         return redirect('peminjaman')->with('success', 'Selamat data berhasil ditambah!');
@@ -134,7 +132,7 @@ class PeminjamanController extends Controller
             'nama' => 'required',
             'prodi' => 'required',
             'tanggal' => 'required',
-            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'foto' => 'image|mimes:jpeg,jpg,png,gif',
             'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
         ]);
         $peminjaman = Peminjaman::findOrfail($id);
@@ -143,14 +141,12 @@ class PeminjamanController extends Controller
         if ($request->foto) {
             Storage::delete($peminjaman->foto);
             //mengambil request gambar dengan nama asli
-            $image = $request->file('foto')->getClientOriginalName();
-            $foto = $request->file('foto')->storeAs('peminjaman', $image);
+            $foto = $request->file('foto')->store('peminjaman');
         } //baru
         if ($request->pdf) {
             Storage::delete($peminjaman->pdf);
             //mengambil request gambar dengan nama asli
-            $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'pdf' adalah name dari inputan
-            $doc = $request->file('pdf')->storeAs('document/peminjaman',$pdf);
+            $pdf = $request->file('pdf')->store('document/peminjaman');
         } //baru
         $peminjaman->update([
             'buku_id' => $request->buku_id,
@@ -159,7 +155,7 @@ class PeminjamanController extends Controller
             'prodi' => $request->prodi,
             'tanggal' => $request->tanggal,
             'foto' => $foto,
-            'pdf' => $doc
+            'pdf' => $pdf
             ]);
 
         return redirect('peminjaman')->with('success', 'Data berhasil di update');
