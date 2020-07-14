@@ -13,17 +13,17 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $category = [
-            ['name' => 'Buku'],
-            ['name' => 'Biografi'],
-            ['name' => 'Cerpen'],
-            ['name' => 'Jurnal'],
-            ['name' => 'Komik'],
-            ['name' => 'Majalah'],
-            ['name' => 'Materi'],
-            ['name' => 'Novel'],
-            ['name' => 'Skripsi'],
+            ['name' => 'Buku', 'foto' => '/category/foto.png', 'pdf' => '/document/category/document.pdf'],
+            ['name' => 'Biografi', 'foto' => '/category/foto.png', 'pdf' => '/document/category/document.pdf'],
+            ['name' => 'Cerpen', 'foto' => '/category/foto.png', 'pdf' => '/document/category/document.pdf'],
+            ['name' => 'Jurnal', 'foto' => '/category/foto.png', 'pdf' => '/document/category/document.pdf'],
+            ['name' => 'Komik', 'foto' => '/category/foto.png', 'pdf' => '/document/category/document.pdf'],
+            ['name' => 'Majalah', 'foto' => '/category/foto.png', 'pdf' => '/document/category/document.pdf'],
+            ['name' => 'Materi', 'foto' => '/category/foto.png', 'pdf' => '/document/category/document.pdf'],
+            ['name' => 'Novel', 'foto' => '/category/foto.png', 'pdf' => '/document/category/document.pdf'],
+            ['name' => 'Skripsi', 'foto' => '/category/foto.png', 'pdf' => '/document/category/document.pdf'],
         ];
-
+        
         foreach ($category as $category){
             Category::create($category);
         }

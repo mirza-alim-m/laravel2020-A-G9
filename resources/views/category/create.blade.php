@@ -34,6 +34,19 @@
                 <label>Nama Kategori</label>
                 <input type="text" class="form-control" name="name" autocomplete="off" required />
             </div>
+            <div class="form-group">
+                <label>Foto</label>
+                <input type="file" class="form-control-file" name="foto"/>
+            </div>
+            <div class="form-group">
+                <label>Berkas Document</label>
+                <input type="file" class="form-control-file @error('pdf') is-invalid @enderror" name="pdf"/>
+                @error('pdf')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
             <button type="submit" class="btn btn-primary">Tambah Data</button>
         </form>
     </div>

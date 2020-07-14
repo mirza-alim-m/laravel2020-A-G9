@@ -115,6 +115,18 @@
                                         <th>Tanggal</th>
                                         <td>{{ $data->tanggal }}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Foto</th>
+                                        <td>
+                                            <img width="25%" src="{{asset('/storage/'.$data->foto)}}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Berkas Document</th>
+                                        <td>
+                                            <a href="{{asset('/storage/'.$data->pdf)}}" target="new" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{$data->pdf}}</a>
+                                        </td>
+                                    </tr>
                                 </thead>
                             </table>
                         </div>

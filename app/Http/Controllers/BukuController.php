@@ -80,7 +80,7 @@ class BukuController extends Controller
             'jumlah' => 'required',
             'penulis' => 'required',
             'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
-            'pdf' => 'mimes:pdf'
+            'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
 
             ]);
         //mengambil request gambar dengan nama asli
@@ -144,7 +144,7 @@ class BukuController extends Controller
             'jumlah' => 'required',
             'penulis' => 'required',
             'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
-            'pdf' => 'mimes:pdf',
+            'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
         ]);
 
         $buku = Buku::findOrfail($id);

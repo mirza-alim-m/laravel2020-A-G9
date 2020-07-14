@@ -20,6 +20,8 @@ class CreatePeminjamanTable extends Migration
             $table->string('nama');
             $table->string('prodi');
             $table->string('tanggal');
+            $table->string('foto');
+            $table->string('pdf');
             $table->timestamps('');
         });
     }

@@ -58,10 +58,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validasi = $request->validate([
-            'name' => 'required'
+        $this->validate($request, [
+            'name' => 'required',
+            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
         ]);
-        $category = Category::create($validasi);
+        $image = $request->file('foto')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
+        $foto = $request->file('foto')->storeAs('category',$image);
+
+        $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
+        $doc = $request->file('pdf')->storeAs('document/category',$pdf);
+
+        $category = Category::create([
+            'name' => $request->name,
+            'foto' => $foto,
+            'pdf' => $doc
+            ]);
 
         return redirect('/category')->with('success', 'Selamat data berhasil ditambah!');
     }
@@ -97,10 +109,34 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validasi = $request->validate([
-            'name' => 'required'
+        $this->validate($request, [
+            'name' => 'required',
+            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
         ]);
-        Category::whereId($id)->update($validasi);
+
+        $category = Category::findOrfail($id);
+        $foto = $category->foto;
+        $pdf = $category->pdf;
+
+         //update dan save gambar ke folder storage creators
+         if ($request->foto) {
+            Storage::delete($category->foto);
+            //mengambil request gambar dengan nama asli
+            $image = $request->file('foto')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
+            $foto = $request->file('foto')->storeAs('category',$image);
+         } //baru
+         if ($request->pdf) {
+            Storage::delete($category->pdf);
+            //mengambil request gambar dengan nama asli
+            $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
+            $doc = $request->file('pdf')->storeAs('document/category',$pdf);
+         } //baru
+         $category->update([
+            'name' => $request->name,
+            'foto' => $foto,
+            'pdf' => $doc
+            ]);
 
         return redirect('category')->with('success', 'Data berhasil di update');
     }
@@ -114,6 +150,12 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
+        if ($category->foto) {
+            Storage::delete($category->foto);
+        }
+        if ($category->pdf) {
+            Storage::delete($category->pdf);
+        }
         $category->delete();
 
         return redirect('/category')->with('success', 'Data berhasil dihapus!');

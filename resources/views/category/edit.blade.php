@@ -36,6 +36,14 @@
                 <label>Nama</label>
                 <input type="text" class="form-control" name="name" value="{{ $category->name }}" />
             </div>
+            <div class="form-group">
+                <label>Ubah Foto</label>
+                <input type="file" class="form-control-file" name="foto"/>
+            </div>
+            <div class="form-group">
+                <label>Ubah Berkas Document</label>
+                <input type="file" class="form-control-file" name="pdf"/>
+            </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
     </form>

@@ -80,8 +80,7 @@ class MemberController extends Controller
             'jk' => 'required',
             'prodi' => 'required',
             'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
-            'pdf' => 'mimes:pdf'
-
+            'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
             ]);
         //mengambil request gambar dengan nama asli
         $image = $request->file('foto')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
@@ -139,7 +138,7 @@ class MemberController extends Controller
             'jk' => 'required',
             'prodi' => 'required',
             'foto' => 'image|mimes:jpeg,jpg,png,gif',// baru 'gambar' adalah name dari input foto crud
-            'pdf' => 'mimes:pdf',
+            'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
         ]);
 
         $member = Member::findOrfail($id);
@@ -157,7 +156,7 @@ class MemberController extends Controller
             Storage::delete($member->pdf);
             //mengambil request gambar dengan nama asli
             $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'pdf' adalah name dari inputan
-            $doc = $request->file('pdf')->storeAs('document',$pdf);
+            $doc = $request->file('pdf')->storeAs('document/member',$pdf);
          } //baru
          $member->update([
             'nim' => $request->nim,
@@ -165,7 +164,7 @@ class MemberController extends Controller
             'jk' => $request->jk,
             'prodi' => $request->prodi,
             'foto' => $foto,
-            'pdf' => $pdf,
+            'pdf' => $doc
             ]);
 
         return redirect('member')->with('success', 'Data berhasil di update');

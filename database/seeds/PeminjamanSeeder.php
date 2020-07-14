@@ -30,6 +30,8 @@ class PeminjamanSeeder extends Seeder
                     'D4 Teknik Informatika',
                     'D4 Akuntansi Sektor Publik')),
                 'tanggal' => now(),
+                'foto'=> '/peminjaman/foto.png',
+                'pdf'=> '/document/peminjaman/document.pdf',
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

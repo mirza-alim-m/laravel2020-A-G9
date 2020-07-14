@@ -22,8 +22,8 @@ class BukuSeeder extends Seeder
                 'penerbit' => $faker->sentence($nbWords = 3, $variableNbWords = true),
                 'penulis' => $faker->name,
                 'jumlah' => $faker->numberBetween(1,10),
-                'foto'=> 'foto',
-                'pdf'=> 'pdf',
+                'foto'=> '/buku/foto.png',
+                'pdf'=> '/document/buku/document.pdf',
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

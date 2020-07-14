@@ -18,7 +18,7 @@ class peminjaman extends Model
     }
 
     public $sortable = [
-        'buku_id', 'nim', 'nama', 'prodi', 'tanggal',
+        'buku_id', 'nim', 'nama', 'prodi', 'tanggal','foto','pdf','created_at','updated_at'
     ];
 
     protected $table = 'peminjamen';
@@ -28,7 +28,7 @@ class peminjaman extends Model
      * @var array
      */
     protected $fillable = [
-        'buku_id', 'nim', 'nama', 'prodi', 'tanggal',
+        'buku_id', 'nim', 'nama', 'prodi', 'tanggal','foto','pdf',
     ];
 
     /**

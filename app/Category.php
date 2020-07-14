@@ -18,7 +18,7 @@ class category extends Model
      */
     protected $table = 'category';
     protected $fillable = [
-        'name'
+        'name','foto','pdf'
     ];
 
     public function buku()

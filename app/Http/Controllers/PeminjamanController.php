@@ -6,6 +6,7 @@ use Kyslik\ColumnSortable\Sortable;
 use App\Peminjaman;
 use App\Buku;
 use Illuminate\Http\Request;
+use Storage;
 
 class PeminjamanController extends Controller
 {
@@ -68,15 +69,31 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
-        $validasi = $request->validate([
+        $this->validate($request, [
             'buku_id' => 'required',
             'nim' => 'required',
             'nama' => 'required',
             'prodi' => 'required',
             'tanggal' => 'required',
+            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
         ]);
-        $peminjaman = Peminjaman::create($validasi);
+        $image = $request->file('foto')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
+        $foto = $request->file('foto')->storeAs('peminjaman',$image);
 
+        $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'gambar' adalah name dari inputan
+        $doc = $request->file('pdf')->storeAs('document/peminjaman',$pdf);
+
+        $peminjaman = Peminjaman::create([
+            'buku_id' => $request->buku_id,
+            'nim' => $request->nim,
+            'nama' => $request->nama,
+            'prodi' => $request->prodi,
+            'tanggal' => $request->tanggal,
+            'foto' => $foto,
+            'pdf' => $doc
+            ]);            
+            
         return redirect('peminjaman')->with('success', 'Selamat data berhasil ditambah!');
     }
 
@@ -111,14 +128,39 @@ class PeminjamanController extends Controller
     //
     public function update(Request $request, $id)
     {
-        $validasi = $request->validate([
+        $this->validate($request, [
             'buku_id' => 'required',
             'nim' => 'required',
             'nama' => 'required',
             'prodi' => 'required',
             'tanggal' => 'required',
+            'foto' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'pdf' => 'mimes:pdf,doc,docx,ppt,pptx'
         ]);
-        Peminjaman::whereId($id)->update($validasi);
+        $peminjaman = Peminjaman::findOrfail($id);
+        $foto = $peminjaman->foto;
+        $pdf = $peminjaman->pdf;
+        if ($request->foto) {
+            Storage::delete($peminjaman->foto);
+            //mengambil request gambar dengan nama asli
+            $image = $request->file('foto')->getClientOriginalName();
+            $foto = $request->file('foto')->storeAs('peminjaman', $image);
+        } //baru
+        if ($request->pdf) {
+            Storage::delete($peminjaman->pdf);
+            //mengambil request gambar dengan nama asli
+            $pdf = $request->file('pdf')->getClientOriginalName(); // baru, 'pdf' adalah name dari inputan
+            $doc = $request->file('pdf')->storeAs('document/peminjaman',$pdf);
+        } //baru
+        $peminjaman->update([
+            'buku_id' => $request->buku_id,
+            'nim' => $request->nim,
+            'nama' => $request->nama,
+            'prodi' => $request->prodi,
+            'tanggal' => $request->tanggal,
+            'foto' => $foto,
+            'pdf' => $doc
+            ]);
 
         return redirect('peminjaman')->with('success', 'Data berhasil di update');
     }
@@ -131,7 +173,13 @@ class PeminjamanController extends Controller
      */
     public function destroy($id)
     {
-        $peminjaman = Peminjaman::findOrFail($id);
+        $peminjaman = Peminjaman::findOrfail($id);
+        if ($request->foto) {
+            Storage::delete($peminjaman->foto);
+        }
+        if ($request->pdf) {
+            Storage::delete($peminjaman->pdf);
+        }
         $peminjaman->delete();
 
         return redirect('/peminjaman')->with('success', 'Data berhasil dihapus!');
