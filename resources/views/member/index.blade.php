@@ -113,13 +113,13 @@
                                         <td>{{ $data->prodi }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Foto</th>
+                                        <th>Foto Profil</th>
                                         <td>
                                             <img width="25%" src="{{asset('/storage/'.$data->foto)}}">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Berkas PDF</th>
+                                        <th>Berkas Document</th>
                                         <td>
                                             <a href="{{asset('/storage/'.$data->pdf)}}" target="new" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{$data->pdf}}</a>
                                         </td>

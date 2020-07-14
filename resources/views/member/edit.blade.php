@@ -66,12 +66,21 @@
                 </select>
             </div>
             <div class="form-group">
+<<<<<<< HEAD
                 <label>Ubah Foto</label>
                 <input type="file" class="form-control-file" name="foto" />
             </div>
             <div class="form-group">
                 <label>Ubah Document</label>
                 <input type="file" class="form-control-file" name="pdf" />
+=======
+                <label>Ubah Foto Profil</label>
+                <input type="file" class="form-control-file" name="foto"/>
+            </div>
+            <div class="form-group">
+                <label>Ubah Berkas Document</label>
+                <input type="file" class="form-control-file" name="pdf"/>
+>>>>>>> 760cd0469ad5d573aac68dd52b64a3b2bdec7c97
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
