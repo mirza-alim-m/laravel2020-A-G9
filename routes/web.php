@@ -42,3 +42,6 @@ Route::resource('category', 'CategoryController');
 
 Route::get('change-password', 'ChangePasswordController@index')->name('change');
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+
+Route::get('auth/{provider}', 'Auth\SocialiteController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\SocialiteController@handleProviderCallback');

@@ -61,6 +61,11 @@
         <div class="input-group col-md-12 mb-2" align="center">
           <button type="submit" class="btn btn-success">Login <i class="fas fa-key"></i></button>
         </div>
+        <div class="form-group row">
+          <div class="col-md-6 offset-md-4" align= "center">
+            <a href="{{ url('/auth/google') }}" class="btn btn-success" align="center"><i class="fab fa-github"></i> Google</a>
+          </div>
+        </div>
         <div class="form-check mt-3">
           <center><button><a href="{{route('register')}}">Created an account</a></button>
             @if (Route::has('password.request'))
