@@ -27,7 +27,7 @@
             </ul>
         </div><br />
         @endif
-        <form method="post" action="{{ route('peminjaman.store') }}">
+        <form enctype="multipart/form-data" method="post" action="{{ route('peminjaman.store') }}">
             @csrf
             <!-- <div class="form-group">
                 <label>Nama Buku</label>
